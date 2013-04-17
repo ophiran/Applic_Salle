@@ -4,6 +4,8 @@
  */
 package Applic_Salle;
 
+import java.awt.event.*;
+
 /**
  *
  * @author Ophiran
@@ -18,6 +20,27 @@ public class Applic_Salle extends javax.swing.JFrame {
         rButtonGroup.add(inter_rButton);
         rButtonGroup.add(pol_rButton);
         rButtonGroup.add(sport_rButton);
+        
+        util_menu.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                login_user(e);
+            }
+            
+        });
+        
+    }
+    
+    private void login_user(ItemEvent e)
+    {
+        System.out.println(e.getItem().toString());
+        
+    }
+    
+    private void login_user2(MouseEvent e)
+    {
+        
+        //System.out.println("test2");
     }
 
     /**
