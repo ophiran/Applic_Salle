@@ -26,8 +26,6 @@ public class Applic_Salle extends javax.swing.JFrame {
             public void itemStateChanged(ItemEvent e) {
                 login_user(e);
             }
-            
-            
         });
         
     }
