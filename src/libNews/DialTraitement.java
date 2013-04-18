@@ -34,7 +34,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             
     
     @Override
-    public void actionPerformed(annulerButtone) {
+    public void actionPerformed(ActionEvent ae) {
         if(ae.getSource().equals(validerButton)){
             newsEdited.setContenu(textArea.getText());
             newsEdited.setImportance(checkBox.isSelected());
