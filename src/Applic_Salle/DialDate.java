@@ -4,20 +4,42 @@
  */
 package Applic_Salle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Ophiran
  */
-public class DialDate extends javax.swing.JDialog {
+public class DialDate extends javax.swing.JDialog implements ActionListener{
 
+    private Journaliste journalisteCourant;
+    
+    
     /**
      * Creates new form DialDate
      */
-    public DialDate(java.awt.Frame parent, boolean modal) {
+    public DialDate(java.awt.Frame parent, boolean modal,Journaliste journaliste) {
         super(parent, modal);
         initComponents();
+        
+        journalisteCourant = journaliste;
+        accepter_Button.addActionListener(this);
+        annuler_Button.addActionListener(this);
+        
+        pays_cBox.removeAllItems();
+        
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(accepter_Button)) {
+            
+        }
+        if(e.getSource().equals(annuler_Button))
+            this.dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,4 +111,6 @@ public class DialDate extends javax.swing.JDialog {
     private javax.swing.JComboBox fTemps_cBox;
     private javax.swing.JComboBox pays_cBox;
     // End of variables declaration//GEN-END:variables
+
+    
 }
