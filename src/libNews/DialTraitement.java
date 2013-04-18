@@ -30,8 +30,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         validerButton.addActionListener(this);
         annulerButton.addActionListener(this);
         
-        if(!(news == null)) {
-            newsEdited = new News(news);
+        if(news != null) {
+            newsEdited = news;
             textArea.setText(newsEdited.getContenu());
             checkBox.setSelected(newsEdited.getImportance());
             keyWords.setText(newsEdited.getMotsCles());
@@ -48,7 +48,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             System.out.println("ERROR: no news referenced");//TODO
             this.dispose();
         }
-        if(!(journalisteConnecte == null)) {
+        if(auteur != null) {
             journalisteConnecte = auteur;
         }
         else{
@@ -65,6 +65,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited.setImportance(checkBox.isSelected());
             newsEdited.setType(radioGroup.getSelection().getActionCommand());
             newsEdited.setMotsCles(keyWords.getText());
+            newsEdited.setAuteur(journalisteConnecte);
             this.dispose();
                     
         }

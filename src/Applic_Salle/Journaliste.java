@@ -10,7 +10,7 @@ import people.*;
  *
  * @author Ophiran
  */
-public class Journaliste extends Personne implements Utilisateur,Identifiable{
+public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable{
 
     private String login;
     private String password;
@@ -64,6 +64,24 @@ public class Journaliste extends Personne implements Utilisateur,Identifiable{
     public boolean isValid() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public Object clone(){
+        Object o = null;
+        try{
+            o = super.clone();
+        }
+        catch(CloneNotSupportedException cnse){
+            cnse.printStackTrace(System.err);
+        }
+        return o;
+    }
+    
+    public Journaliste copy(){
+        return new Journaliste(this.nom, this.prenom, this.login, this.password, this.id);
+    }
+     
+
 
     
     

@@ -38,7 +38,7 @@ public class News {
         contenu = s;
     }
     public void setAuteur(Journaliste j){
-        //auteur.clone(j);
+        auteur = j.copy();
     }
     public void setImportance(boolean b){
         importance = b;
