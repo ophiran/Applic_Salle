@@ -6,6 +6,7 @@ package Applic_Salle;
 
 import libNews.News;
 import java.awt.event.*;
+import java.util.Vector;
 import people.*;
 import people.dialogs.*;
 
@@ -19,6 +20,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
      * Creates new form Applic_Salle
      */
     Journaliste journalisteConnecte;
+    Vector<News> listeNews = new Vector<News>();
     
     public Applic_Salle() {
         initComponents();
@@ -43,7 +45,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
 
             }
             if(e.getSource().equals(ajouter_button)){
-                new News(addNews_txtField.getText(), journalisteConnecte, false, rButtonGroup.getSelection().getActionCommand())
+                listeNews.add(new News(addNews_txtField.getText(), journalisteConnecte, false, rButtonGroup.getSelection().getActionCommand()));
             }
         }
     }
