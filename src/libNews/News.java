@@ -17,6 +17,7 @@ public class News {
     private boolean importance;
     private String type;
     private String motsCles;
+    private String commentaires;
   
     public String getContenu(){
         return contenu;
@@ -33,7 +34,16 @@ public class News {
     public String getMotsCles(){
         return motsCles;
     }
-    
+    public String getCommentaires(){
+        return commentaires;
+    }
+    public String getTitre(){
+        if(importance)
+            return "I - " + contenu;
+        else
+            return "N - " + contenu;
+    }
+        
     public void setContenu(String s){
         contenu = s;
     }
@@ -49,7 +59,11 @@ public class News {
     public void setMotsCles(String s){
         motsCles = s;
     }
-    public News(String contenu, Journaliste auteur, boolean importance, String type){
+    public void setCommentaires(String s){
+        commentaires = s;
+    }
+        
+    public News(String contenu, Journaliste auteur, boolean importance, String type, String commentaires){
         this.contenu = contenu;
         this.auteur = auteur;
         this.importance = importance;
@@ -58,10 +72,11 @@ public class News {
             this.type = type;
         else
             this.type = Categories.Internationale;
+        this.commentaires = commentaires;
         
     }
     public News(News n){
-        this(n.contenu, n.auteur, n.importance, n.type);
+        this(n.contenu, n.auteur, n.importance, n.type, n.commentaires);
         
     }
     

@@ -8,6 +8,7 @@ import constantes.Categories;
 import libNews.News;
 import java.awt.event.*;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
 import libNews.DialTraitement;
 import people.*;
 import people.dialogs.*;
@@ -23,6 +24,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
      */
     public static Journaliste journalisteConnecte;
     ImplVerificateur mappingJournaliste = new ImplVerificateur();
+    public static DefaultListModel listeNewsInter = new DefaultListModel();
+    public static DefaultListModel listeNewsSport = new DefaultListModel();
+    public static DefaultListModel listeNewsPolitique = new DefaultListModel();
+    public static Vector<News> listeNewsPeople = new Vector<News>();
     
     public Applic_Salle() {
         initComponents();
@@ -36,33 +41,47 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         ajouter_button.addActionListener(this);
         traiter_button.addActionListener(this);
         date_item.addActionListener(this);
+        about_item.addActionListener(this);
+        sup_button.addActionListener(this);
+        labelJournaliste.setText("Deconnected");
+        
+        listInter.setModel(listeNewsInter);
+        listPolitique.setModel(listeNewsPolitique);
+        listSport.setModel(listeNewsSport);
         
         news_comboBox.removeAllItems();
-        news_comboBox.addItem(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale));
-        news_comboBox.addItem(new News("News Bidon 2", journalisteConnecte, true, Categories.Internationale));
-        news_comboBox.addItem(new News("News Bidon 3", journalisteConnecte, false, Categories.People));
+        news_comboBox.addItem(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale, ""));
+        news_comboBox.addItem(new News("News Bidon 2", journalisteConnecte, true, Categories.Internationale, ""));
+        news_comboBox.addItem(new News("News Bidon 3", journalisteConnecte, false, Categories.People, ""));
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(login_item)) {
             new DialLogin(this,rootPaneCheckingEnabled,mappingJournaliste).setVisible(true);
+            labelJournaliste.setText(journalisteConnecte.getLogin());
+        }
+        if(e.getSource().equals(about_item)){
+            new DialAbout(this,rootPaneCheckingEnabled).setVisible(true);
         }
         if(journalisteConnecte != null){
             if(e.getSource() == logout_item) {
                 journalisteConnecte = null;
+                labelJournaliste.setText("Déconnecté");
             }
             if(e.getSource().equals(ajouter_button)){
-                news_comboBox.addItem(new News("News Bidon", journalisteConnecte, false, Categories.Internationale));
+                news_comboBox.addItem(new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, ""));
             }
             if(e.getSource().equals(traiter_button)){
                 new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
-
-                
             }
-            if(e.getSource().equals(date_item)) {
+            if(e.getSource().equals(sup_button)){
+                news_comboBox.removeItemAt(news_comboBox.getSelectedIndex());
+            }
+            if(e.getSource().equals(date_item)){
                 new DialDate(this,rootPaneCheckingEnabled,journalisteConnecte).setVisible(true);
             }
+
         }
     }
 
@@ -91,12 +110,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         pol_rButton = new javax.swing.JRadioButton();
         sport_rButton = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listInter = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        listPolitique = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        listSport = new javax.swing.JList();
         edit_button = new javax.swing.JButton();
+        labelJournaliste = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         util_menu = new javax.swing.JMenu();
         login_item = new javax.swing.JMenuItem();
@@ -125,7 +145,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
 
         news_comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        addNews_txtField.setText("jTextField1");
+        addNews_txtField.setText("Nouvelle news");
 
         jLabel1.setText("News recues:");
 
@@ -147,26 +167,26 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
 
         sport_rButton.setText("Infos sports");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        listInter.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listInter);
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        listPolitique.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(listPolitique);
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
+        listSport.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList3);
+        jScrollPane3.setViewportView(listSport);
 
         edit_button.setText("Editer");
 
@@ -244,19 +264,22 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(46, 46, 46)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(news_comboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(addNews_txtField, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jName_label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,7 +292,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                                             .addComponent(sup_button))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGap(109, 109, 109)
                                             .addComponent(date_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(124, 124, 124)
@@ -300,7 +323,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jLabel3)
                     .addComponent(jName_label)
                     .addComponent(jLabel4)
-                    .addComponent(date_label))
+                    .addComponent(date_label)
+                    .addComponent(labelJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(news_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,9 +408,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel jName_label;
@@ -397,6 +418,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JLabel labelJournaliste;
+    private javax.swing.JList listInter;
+    private javax.swing.JList listPolitique;
+    private javax.swing.JList listSport;
     private javax.swing.JMenuItem log_item;
     private javax.swing.JMenuItem login_item;
     private javax.swing.JMenuItem logout_item;

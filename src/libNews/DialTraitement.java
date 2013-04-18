@@ -32,7 +32,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         
         if(news != null) {
             newsEdited = news;
-            textArea.setText(newsEdited.getContenu());
+            textFieldContenu.setText(newsEdited.getContenu());
+            textArea.setText(newsEdited.getCommentaires());
             checkBox.setSelected(newsEdited.getImportance());
             keyWords.setText(newsEdited.getMotsCles());
             if(newsEdited.getType().equals(Categories.Internationale))
@@ -61,19 +62,28 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource().equals(validerButton)){
-            newsEdited.setContenu(textArea.getText());
+            newsEdited.setContenu(textFieldContenu.getText());
             newsEdited.setImportance(checkBox.isSelected());
-            if(radioInternationale.isSelected())
-                newsEdited.setType(Categories.Internationale);
-            if(radioPolitique.isSelected())
-                newsEdited.setType(Categories.Politique);
-            if(radioSport.isSelected())
-                newsEdited.setType(Categories.Sport);
-            if(radioPeople.isSelected())
-                newsEdited.setType(Categories.People);
-            //newsEdited.setType(radioGroup.getSelection().getActionCommand());
             newsEdited.setMotsCles(keyWords.getText());
             newsEdited.setAuteur(journalisteConnecte);
+            newsEdited.setCommentaires(textArea.getText());
+            if(radioInternationale.isSelected()){
+                newsEdited.setType(Categories.Internationale);
+                Applic_Salle.Applic_Salle.listeNewsInter.addElement(newsEdited.getTitre());
+            }
+            if(radioPolitique.isSelected()){
+                newsEdited.setType(Categories.Politique);
+                Applic_Salle.Applic_Salle.listeNewsPolitique.addElement(newsEdited.getTitre());
+            }
+            if(radioSport.isSelected()){
+                newsEdited.setType(Categories.Sport);
+                Applic_Salle.Applic_Salle.listeNewsSport.addElement(newsEdited.getTitre());
+            }
+            if(radioPeople.isSelected()){
+                newsEdited.setType(Categories.People);
+                Applic_Salle.Applic_Salle.listeNewsPeople.addElement(newsEdited);
+            }
+            
             this.dispose();
                     
         }
@@ -102,6 +112,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         keyWords = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        textFieldContenu = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,6 +135,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
+        jLabel1.setText("Texte :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,29 +146,39 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
                 .addComponent(validerButton)
                 .addGap(101, 101, 101)
                 .addComponent(annulerButton)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 222, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(keyWords)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(keyWords)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(radioPeople)
-                            .addComponent(radioSport)
-                            .addComponent(radioInternationale)
-                            .addComponent(radioPolitique, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkBox))
-                        .addGap(30, 30, 30))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(textFieldContenu, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioPeople)
+                                    .addComponent(radioSport)
+                                    .addComponent(radioInternationale)
+                                    .addComponent(radioPolitique, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkBox))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(textFieldContenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(checkBox)
                         .addGap(18, 18, 18)
@@ -164,11 +188,10 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
                         .addGap(18, 18, 18)
                         .addComponent(radioSport)
                         .addGap(18, 18, 18)
-                        .addComponent(radioPeople))
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                        .addComponent(radioPeople)))
+                .addGap(43, 43, 43)
                 .addComponent(keyWords, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(validerButton)
                     .addComponent(annulerButton))
@@ -182,6 +205,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annulerButton;
     private javax.swing.JCheckBox checkBox;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField keyWords;
     private javax.swing.ButtonGroup radioGroup;
@@ -190,6 +214,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
     private javax.swing.JRadioButton radioPolitique;
     private javax.swing.JRadioButton radioSport;
     private javax.swing.JTextArea textArea;
+    private javax.swing.JTextField textFieldContenu;
     private javax.swing.JButton validerButton;
     // End of variables declaration//GEN-END:variables
 
