@@ -5,12 +5,14 @@
 package Applic_Salle;
 
 import java.awt.event.*;
+import people.*;
+import people.dialogs.*;
 
 /**
  *
  * @author Ophiran
  */
-public class Applic_Salle extends javax.swing.JFrame {
+public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form Applic_Salle
@@ -21,25 +23,19 @@ public class Applic_Salle extends javax.swing.JFrame {
         rButtonGroup.add(pol_rButton);
         rButtonGroup.add(sport_rButton);
         
-        util_menu.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                login_user(e);
-            }
-        });
-        
+        login_item.addActionListener(this);
+        logout_item.addActionListener(this);
     }
     
-    private void login_user(ItemEvent e)
-    {
-        System.out.println(e.getItem().toString());
+    @Override
+    public void actionPerformed(ActionEvent e) {
         
-    }
-    
-    private void login_user2(MouseEvent e)
-    {
-        
-        //System.out.println("test2");
+        if(e.getSource().equals(login_item)) {
+            new DialogLogin().setVisible(true);
+        }
+        if(e.getSource() == logout_item) {
+            
+        }
     }
 
     /**
@@ -389,4 +385,6 @@ public class Applic_Salle extends javax.swing.JFrame {
     private javax.swing.JButton traiter_button;
     private javax.swing.JMenu util_menu;
     // End of variables declaration//GEN-END:variables
+
+    
 }
