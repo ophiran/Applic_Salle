@@ -22,7 +22,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
      * Creates new form Applic_Salle
      */
     public static Journaliste journalisteConnecte;
-    Vector<News> listeNews = new Vector<News>();
     ImplVerificateur mappingJournaliste = new ImplVerificateur();
     
     public Applic_Salle() {
@@ -39,8 +38,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         
         news_comboBox.removeAllItems();
         news_comboBox.addItem(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale));
-        news_comboBox.addItem(new News("News Bidon 2", journalisteConnecte, false, Categories.Internationale));
-        news_comboBox.addItem(new News("News Bidon 3", journalisteConnecte, false, Categories.Internationale));
+        news_comboBox.addItem(new News("News Bidon 2", journalisteConnecte, true, Categories.Internationale));
+        news_comboBox.addItem(new News("News Bidon 3", journalisteConnecte, false, Categories.People));
     }
     
     @Override
@@ -50,13 +49,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         }
         if(journalisteConnecte != null){
             if(e.getSource() == logout_item) {
-
+                journalisteConnecte = null;
             }
             if(e.getSource().equals(ajouter_button)){
                 news_comboBox.addItem(new News("News Bidon", journalisteConnecte, false, Categories.Internationale));
             }
             if(e.getSource().equals(traiter_button)){
-                System.out.println("TEST DEBUG");
                 new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
                 
                 

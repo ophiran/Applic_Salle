@@ -64,6 +64,11 @@ public class News {
         this(n.contenu, n.auteur, n.importance, n.type);
         
     }
+    
+    @Override
+    public String toString(){
+        return contenu;
+    }
 
 
 }
