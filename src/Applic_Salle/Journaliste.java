@@ -12,24 +12,29 @@ import people.*;
  */
 public class Journaliste extends Personne implements Utilisateur,Identifiable{
 
+    private String login;
+    private String password;
+    
+    
+    
     @Override
     public String getLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return login;
     }
 
     @Override
-    public void setLogin(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return password;
     }
 
     @Override
-    public void setPass(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPass(String password) {
+        this.password = password;
     }
 
     @Override
