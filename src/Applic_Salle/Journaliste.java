@@ -14,8 +14,21 @@ public class Journaliste extends Personne implements Utilisateur,Identifiable{
 
     private String login;
     private String password;
+    private String id;
     
+    public Journaliste(String nom,String prenom,String login,String password)
+    {
+        this(nom,prenom,login,password,"");
+    }
     
+    public Journaliste(String nom,String prenom,String login,String password,String id)
+    {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.password = password;
+        this.id = id;
+    }
     
     @Override
     public String getLogin() {
@@ -39,12 +52,12 @@ public class Journaliste extends Personne implements Utilisateur,Identifiable{
 
     @Override
     public String getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
     @Override
-    public void setId(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
