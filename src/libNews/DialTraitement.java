@@ -4,6 +4,7 @@
  */
 package libNews;
 
+import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,10 +28,21 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         
         if(!news.equals(null)) {
             newsEdited = new News(news);
+            textArea.setText(newsEdited.getContenu());
+            checkBox.setSelected(newsEdited.getImportance());
+            if(newsEdited.getType().equals(Categories.Internationale))
+                radioGroup.setSelected(radioInternationale.getModel(), modal);
+            if(newsEdited.getType().equals(Categories.Politique))
+                radioGroup.setSelected(radioPolitique.getModel(), modal);  
+            if(newsEdited.getType().equals(Categories.Sport))
+                radioGroup.setSelected(radioSport.getModel(), modal);
+            if(newsEdited.getType().equals(Categories.People))
+                radioGroup.setSelected(radioPeople.getModel(), modal);    
         }
         else{
             System.out.println("ERROR: no news referenced");//TODO
         }
+    }
             
     
     @Override
