@@ -4,6 +4,7 @@
  */
 package libNews;
 
+import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
      * Creates new form DialTraitement
      */
     private News newsEdited;
-    public DialTraitement(java.awt.Frame parent, boolean modal, News news) {
+    private Journaliste journalisteConnecte;
+    public DialTraitement(java.awt.Frame parent, boolean modal, News news, Journaliste auteur) {
         super(parent, modal);
         initComponents();
         radioGroup.add(radioPolitique);
@@ -26,7 +28,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         radioGroup.add(radioSport);
         radioGroup.add(radioPeople);
         
-        if(!news.equals(null)) {
+        if(!(news == null)) {
             newsEdited = new News(news);
             textArea.setText(newsEdited.getContenu());
             checkBox.setSelected(newsEdited.getImportance());
@@ -41,6 +43,14 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         }
         else{
             System.out.println("ERROR: no news referenced");//TODO
+            this.dispose();
+        }
+        if(!(journalisteConnecte == null)) {
+            journalisteConnecte = auteur;
+        }
+        else{
+            System.out.println("ERROR: no journalist referenced");//TODO
+            this.dispose();
         }
     }
             
@@ -52,6 +62,9 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited.setImportance(checkBox.isSelected());
             newsEdited.setType(radioGroup.getSelection().getActionCommand());
                     
+        }
+        if(ae.getSource().equals(annulerButton)){
+            this.dispose();
         }
     }
         
