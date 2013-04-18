@@ -19,7 +19,7 @@ public class News {
     private Journaliste auteur;
     private boolean importance;
     private TypeNews type;
-   
+  
         
     public News(String contenu, Journaliste auteur, boolean importance, TypeNews type){
         this.contenu = contenu;
