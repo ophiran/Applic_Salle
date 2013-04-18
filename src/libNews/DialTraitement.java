@@ -27,6 +27,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         radioGroup.add(radioInternationale);
         radioGroup.add(radioSport);
         radioGroup.add(radioPeople);
+        validerButton.addActionListener(this);
+        annulerButton.addActionListener(this);
         
         if(!(news == null)) {
             newsEdited = new News(news);
@@ -63,6 +65,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited.setImportance(checkBox.isSelected());
             newsEdited.setType(radioGroup.getSelection().getActionCommand());
             newsEdited.setMotsCles(keyWords.getText());
+            this.dispose();
                     
         }
         if(ae.getSource().equals(annulerButton)){
