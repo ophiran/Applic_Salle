@@ -36,6 +36,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         logout_item.addActionListener(this);
         ajouter_button.addActionListener(this);
         
+        news_comboBox.removeAllItems();
+        news_comboBox.addItem(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale));
+        news_comboBox.addItem(new News("News Bidon 2", journalisteConnecte, false, Categories.Internationale));
+        news_comboBox.addItem(new News("News Bidon 3", journalisteConnecte, false, Categories.Internationale));
     }
     
     @Override
