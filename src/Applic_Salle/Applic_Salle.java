@@ -4,6 +4,7 @@
  */
 package Applic_Salle;
 
+import libNews.News;
 import java.awt.event.*;
 import people.*;
 import people.dialogs.*;
@@ -17,24 +18,33 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     /**
      * Creates new form Applic_Salle
      */
+    Journaliste journalisteConnecte;
+    
     public Applic_Salle() {
         initComponents();
+        
         rButtonGroup.add(inter_rButton);
         rButtonGroup.add(pol_rButton);
         rButtonGroup.add(sport_rButton);
         
         login_item.addActionListener(this);
         logout_item.addActionListener(this);
+        ajouter_button.addActionListener(this);
+        
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         if(e.getSource().equals(login_item)) {
             new DialogLogin().setVisible(true);
         }
-        if(e.getSource() == logout_item) {
-            
+        if(!journalisteConnecte.equals(null)){
+            if(e.getSource() == logout_item) {
+
+            }
+            if(e.getSource().equals(ajouter_button)){
+                new News(addNews_txtField.getText(), journalisteConnecte, false, rButtonGroup.getSelection().getActionCommand())
+            }
         }
     }
 
