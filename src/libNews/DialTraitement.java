@@ -42,8 +42,8 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             if(newsEdited.getType().equals(Categories.Sport))
                 radioGroup.setSelected(radioSport.getModel(), modal);
             if(newsEdited.getType().equals(Categories.People))
-                radioGroup.setSelected(radioPeople.getModel(), modal);    
-        }
+                radioGroup.setSelected(radioPeople.getModel(), modal);
+        }   
         else{
             System.out.println("ERROR: no news referenced");//TODO
             this.dispose();
@@ -63,7 +63,15 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         if(ae.getSource().equals(validerButton)){
             newsEdited.setContenu(textArea.getText());
             newsEdited.setImportance(checkBox.isSelected());
-            newsEdited.setType(radioGroup.getSelection().getActionCommand());
+            if(radioInternationale.isSelected())
+                newsEdited.setType(Categories.Internationale);
+            if(radioPolitique.isSelected())
+                newsEdited.setType(Categories.Politique);
+            if(radioSport.isSelected())
+                newsEdited.setType(Categories.Sport);
+            if(radioPeople.isSelected())
+                newsEdited.setType(Categories.People);
+            //newsEdited.setType(radioGroup.getSelection().getActionCommand());
             newsEdited.setMotsCles(keyWords.getText());
             newsEdited.setAuteur(journalisteConnecte);
             this.dispose();

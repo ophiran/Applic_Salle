@@ -56,7 +56,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
             }
             if(e.getSource().equals(traiter_button)){
                 new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
-                
+
                 
             }
         }
