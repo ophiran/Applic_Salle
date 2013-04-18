@@ -21,9 +21,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     /**
      * Creates new form Applic_Salle
      */
-    Journaliste journalisteConnecte;
+    public static Journaliste journalisteConnecte;
     Vector<News> listeNews = new Vector<News>();
-    ImplVerificateur mappingJournaliste;
+    ImplVerificateur mappingJournaliste = new ImplVerificateur();
     
     public Applic_Salle() {
         initComponents();
@@ -45,7 +45,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(login_item)) {
-            new DialogLogin(mappingJournaliste).setVisible(true);
+            new DialLogin(this,rootPaneCheckingEnabled,mappingJournaliste).setVisible(true);
         }
         if(!(journalisteConnecte == null)){
             if(e.getSource() == logout_item) {
