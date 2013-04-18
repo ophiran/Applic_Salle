@@ -4,9 +4,11 @@
  */
 package Applic_Salle;
 
+import constantes.Categories;
 import libNews.News;
 import java.awt.event.*;
 import java.util.Vector;
+import libNews.DialTraitement;
 import people.*;
 import people.dialogs.*;
 
@@ -41,12 +43,16 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         if(e.getSource().equals(login_item)) {
             new DialogLogin(mappingJournaliste).setVisible(true);
         }
-        if(!journalisteConnecte.equals(null)){
+        if(!(journalisteConnecte == null)){
             if(e.getSource() == logout_item) {
 
             }
             if(e.getSource().equals(ajouter_button)){
-                listeNews.add(new News(addNews_txtField.getText(), journalisteConnecte, false, rButtonGroup.getSelection().getActionCommand()));
+                news_comboBox.addItem(new News("News Bidon", journalisteConnecte, false, Categories.Internationale));
+            }
+            if(e.getSource().equals(traiter_button)){
+                new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
+                
             }
         }
     }

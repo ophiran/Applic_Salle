@@ -32,6 +32,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited = new News(news);
             textArea.setText(newsEdited.getContenu());
             checkBox.setSelected(newsEdited.getImportance());
+            keyWords.setText(newsEdited.getMotsCles());
             if(newsEdited.getType().equals(Categories.Internationale))
                 radioGroup.setSelected(radioInternationale.getModel(), modal);
             if(newsEdited.getType().equals(Categories.Politique))
@@ -61,6 +62,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited.setContenu(textArea.getText());
             newsEdited.setImportance(checkBox.isSelected());
             newsEdited.setType(radioGroup.getSelection().getActionCommand());
+            newsEdited.setMotsCles(keyWords.getText());
                     
         }
         if(ae.getSource().equals(annulerButton)){
@@ -87,6 +89,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         annulerButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
+        keyWords = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,23 +115,28 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioPeople)
-                    .addComponent(radioSport)
-                    .addComponent(radioInternationale)
-                    .addComponent(radioPolitique, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBox))
-                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(88, 88, 88)
                 .addComponent(validerButton)
-                .addGap(99, 99, 99)
+                .addGap(101, 101, 101)
                 .addComponent(annulerButton)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(keyWords)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioPeople)
+                            .addComponent(radioSport)
+                            .addComponent(radioInternationale)
+                            .addComponent(radioPolitique, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkBox))
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,11 +154,13 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
                         .addGap(18, 18, 18)
                         .addComponent(radioPeople))
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(keyWords, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(validerButton)
                     .addComponent(annulerButton))
-                .addGap(27, 27, 27))
+                .addContainerGap())
         );
 
         pack();
@@ -161,6 +171,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
     private javax.swing.JButton annulerButton;
     private javax.swing.JCheckBox checkBox;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keyWords;
     private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JRadioButton radioInternationale;
     private javax.swing.JRadioButton radioPeople;

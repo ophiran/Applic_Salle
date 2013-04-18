@@ -16,6 +16,7 @@ public class News {
     private Journaliste auteur;
     private boolean importance;
     private String type;
+    private String motsCles;
   
     public String getContenu(){
         return contenu;
@@ -29,6 +30,9 @@ public class News {
     public String getType(){
         return type;
     }
+    public String getMotsCles(){
+        return motsCles;
+    }
     
     public void setContenu(String s){
         contenu = s;
@@ -41,6 +45,9 @@ public class News {
     }
     public void setType(String s){
         type = s;
+    }
+    public void setMotsCles(String s){
+        motsCles = s;
     }
     public News(String contenu, Journaliste auteur, boolean importance, String type){
         this.contenu = contenu;
