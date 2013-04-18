@@ -6,6 +6,8 @@ package Applic_Salle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.*;
+import java.util.*;
 
 /**
  *
@@ -28,6 +30,26 @@ public class DialDate extends javax.swing.JDialog implements ActionListener{
         annuler_Button.addActionListener(this);
         
         pays_cBox.removeAllItems();
+        fDate_cBox.removeAllItems();
+        fTemps_cBox.removeAllItems();
+        
+        for(Locale item: DateFormat.getAvailableLocales()){
+            if(!item.getDisplayCountry().isEmpty())
+            {
+                pays_cBox.addItem(item.getDisplayCountry());
+            }
+        }
+        
+        fDate_cBox.addItem("Short");
+        fDate_cBox.addItem("Medium");
+        fDate_cBox.addItem("Long");
+        fDate_cBox.addItem("Full");
+        
+        fTemps_cBox.addItem("Short");
+        fTemps_cBox.addItem("Medium");
+        fTemps_cBox.addItem("Long");
+        fTemps_cBox.addItem("Full");
+        
         
     }
 
