@@ -35,6 +35,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         logout_item.addActionListener(this);
         ajouter_button.addActionListener(this);
         traiter_button.addActionListener(this);
+        date_item.addActionListener(this);
         
         news_comboBox.removeAllItems();
         news_comboBox.addItem(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale));
@@ -58,6 +59,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                 new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
 
                 
+            }
+            if(e.getSource().equals(date_item)) {
+                new DialDate(this,rootPaneCheckingEnabled,journalisteConnecte).setVisible(true);
             }
         }
     }
