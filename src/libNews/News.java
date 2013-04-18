@@ -17,7 +17,31 @@ public class News {
     private boolean importance;
     private String type;
   
-        
+    public String getContenu(){
+        return contenu;
+    }
+    public Journaliste getAuteur(){
+        return auteur;
+    }
+    public boolean getImportance(){
+        return importance;
+    }
+    public String getType(){
+        return type;
+    }
+    
+    public void setContenu(String s){
+        contenu = s;
+    }
+    public void setAuteur(Journaliste j){
+        //auteur.clone(j);
+    }
+    public void setImportance(boolean b){
+        importance = b;
+    }
+    public void setType(String s){
+        type = s;
+    }
     public News(String contenu, Journaliste auteur, boolean importance, String type){
         this.contenu = contenu;
         this.auteur = auteur;
@@ -27,6 +51,10 @@ public class News {
             this.type = type;
         else
             this.type = Categories.Internationale;
+        
+    }
+    public News(News n){
+        this(n.contenu, n.auteur, n.importance, n.type);
         
     }
 
