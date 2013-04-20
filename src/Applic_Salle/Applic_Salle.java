@@ -7,7 +7,7 @@ package Applic_Salle;
 import constantes.Categories;
 import libNews.News;
 import java.awt.event.*;
-import java.util.Vector;
+import java.util.*;
 import javax.swing.DefaultListModel;
 import libNews.DialTraitement;
 import people.*;
@@ -28,6 +28,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     public static DefaultListModel listeNewsSport = new DefaultListModel();
     public static DefaultListModel listeNewsPolitique = new DefaultListModel();
     public static Vector<News> listeNewsPeople = new Vector<News>();
+    public Date date = new Date();
     
     public Applic_Salle() {
         initComponents();
@@ -44,6 +45,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         about_item.addActionListener(this);
         sup_button.addActionListener(this);
         labelJournaliste.setText("Deconnected");
+        date_label.setText("Deconnected");
         
         listInter.setModel(listeNewsInter);
         listPolitique.setModel(listeNewsPolitique);
@@ -60,6 +62,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         if(e.getSource().equals(login_item)) {
             new DialLogin(this,rootPaneCheckingEnabled,mappingJournaliste).setVisible(true);
             labelJournaliste.setText(journalisteConnecte.getLogin());
+            date_label.setText(journalisteConnecte.getFormat().format(date));
         }
         if(e.getSource().equals(about_item)){
             new DialAbout(this,rootPaneCheckingEnabled).setVisible(true);
@@ -68,6 +71,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
             if(e.getSource() == logout_item) {
                 journalisteConnecte = null;
                 labelJournaliste.setText("Déconnecté");
+                date_label.setText("Déconnecté");
             }
             if(e.getSource().equals(ajouter_button)){
                 news_comboBox.addItem(new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, ""));
@@ -80,6 +84,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
             }
             if(e.getSource().equals(date_item)){
                 new DialDate(this,rootPaneCheckingEnabled,journalisteConnecte).setVisible(true);
+                date_label.setText(journalisteConnecte.getFormat().format(date));
             }
 
         }
@@ -281,27 +286,29 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                                         .addComponent(labelJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jName_label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(ajouter_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(traiter_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGap(55, 55, 55)
-                                            .addComponent(sup_button))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(109, 109, 109)
-                                            .addComponent(date_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(124, 124, 124)
-                                        .addComponent(sport_rButton))))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(124, 124, 124)
+                                                .addComponent(sport_rButton))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(ajouter_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(traiter_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(55, 55, 55)
+                                                .addComponent(sup_button))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(date_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(inter_rButton)
                                 .addGap(131, 131, 131)
                                 .addComponent(pol_rButton)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,13 +326,14 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jName_label)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(labelJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jName_label))
                     .addComponent(jLabel4)
-                    .addComponent(date_label)
-                    .addComponent(labelJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                    .addComponent(date_label, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(news_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -350,7 +358,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(edit_button)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
