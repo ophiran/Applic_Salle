@@ -16,7 +16,7 @@ import java.util.*;
 public class DialDate extends javax.swing.JDialog implements ActionListener{
 
     private Journaliste journalisteCourant;
-    private Vector<LocaleCustom> localeList = new Vector<>();
+    private Vector<LocaleCustom> localeList = new Vector<LocaleCustom>();
     
     
     /**
