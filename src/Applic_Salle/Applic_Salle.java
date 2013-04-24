@@ -43,7 +43,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         date_item.addActionListener(this);
         about_item.addActionListener(this);
         sup_button.addActionListener(this);
-        labelJournaliste.setText("Deconnected");
+        labelJournaliste.setText("Déconnecté");
         
         listInter.setModel(listeNewsInter);
         listPolitique.setModel(listeNewsPolitique);
