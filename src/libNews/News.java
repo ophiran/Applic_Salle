@@ -37,12 +37,6 @@ public class News {
     public String getCommentaires(){
         return commentaires;
     }
-    public String getTitre(){
-        if(importance)
-            return "I - " + contenu;
-        else
-            return "N - " + contenu;
-    }
         
     public void setContenu(String s){
         contenu = s;
@@ -82,7 +76,10 @@ public class News {
     
     @Override
     public String toString(){
-        return contenu;
+        if(importance)
+            return "I - " + contenu;
+        else
+            return "N - " + contenu;
     }
 
 

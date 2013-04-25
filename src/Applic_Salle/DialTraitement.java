@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package libNews;
+package Applic_Salle;
 
 import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import libNews.News;
 
 /**
  *
@@ -19,6 +20,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
      * Creates new form DialTraitement
      */
     private News newsEdited;
+    private News previousNews;
     private Journaliste journalisteConnecte;
     public DialTraitement(java.awt.Frame parent, boolean modal, News news, Journaliste auteur) {
         super(parent, modal);
@@ -32,6 +34,7 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
         
         if(news != null) {
             newsEdited = news;
+            previousNews = news;
             textFieldContenu.setText(newsEdited.getContenu());
             textArea.setText(newsEdited.getCommentaires());
             checkBox.setSelected(newsEdited.getImportance());
@@ -69,20 +72,21 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
             newsEdited.setCommentaires(textArea.getText());
             if(radioInternationale.isSelected()){
                 newsEdited.setType(Categories.Internationale);
-                Applic_Salle.Applic_Salle.listeNewsInter.addElement(newsEdited.getTitre());
+                Applic_Salle.listeNewsInter.addElement(newsEdited);
             }
             if(radioPolitique.isSelected()){
                 newsEdited.setType(Categories.Politique);
-                Applic_Salle.Applic_Salle.listeNewsPolitique.addElement(newsEdited.getTitre());
+                Applic_Salle.listeNewsPolitique.addElement(newsEdited);
             }
             if(radioSport.isSelected()){
                 newsEdited.setType(Categories.Sport);
-                Applic_Salle.Applic_Salle.listeNewsSport.addElement(newsEdited.getTitre());
+                Applic_Salle.listeNewsSport.addElement(newsEdited);
             }
             if(radioPeople.isSelected()){
                 newsEdited.setType(Categories.People);
-                Applic_Salle.Applic_Salle.listeNewsPeople.addElement(newsEdited);
+                Applic_Salle.listeNewsPeople.addElement(newsEdited);
             }
+            Applic_Salle.listeNewsATraiter.removeElement(previousNews);
             
             this.dispose();
                     
