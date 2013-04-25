@@ -4,6 +4,11 @@
  */
 package Applic_Salle;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import people.*;
 
 /**
@@ -15,6 +20,7 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
     private String login;
     private String password;
     private String id;
+    private DateFormat dateFormat;
     
     public Journaliste(String nom,String prenom,String login,String password)
     {
@@ -28,6 +34,17 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
         this.login = login;
         this.password = password;
         this.id = id;
+        dateFormat = DateFormat.getDateInstance();
+    }
+    
+    public void setFormat(DateFormat dateFormat)
+    {
+        this.dateFormat = dateFormat;
+    }
+    
+    public DateFormat getFormat()
+    {
+        return dateFormat;
     }
     
     @Override

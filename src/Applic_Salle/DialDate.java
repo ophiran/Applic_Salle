@@ -16,6 +16,7 @@ import java.util.*;
 public class DialDate extends javax.swing.JDialog implements ActionListener{
 
     private Journaliste journalisteCourant;
+    private Vector<LocaleCustom> localeList = new Vector<LocaleCustom>();
     
     
     /**
@@ -33,30 +34,32 @@ public class DialDate extends javax.swing.JDialog implements ActionListener{
         fDate_cBox.removeAllItems();
         fTemps_cBox.removeAllItems();
         
-        for(Locale item: DateFormat.getAvailableLocales()){
+        for(Locale item: SimpleDateFormat.getAvailableLocales()){
             if(!item.getDisplayCountry().isEmpty())
             {
-                pays_cBox.addItem(item.getDisplayCountry());
+                localeList.add(new LocaleCustom(item));
+                pays_cBox.addItem(localeList.lastElement());
             }
         }
         
-        fDate_cBox.addItem("Short");
-        fDate_cBox.addItem("Medium");
-        fDate_cBox.addItem("Long");
         fDate_cBox.addItem("Full");
+        fDate_cBox.addItem("Long");
+        fDate_cBox.addItem("Medium");
+        fDate_cBox.addItem("Short");
         
-        fTemps_cBox.addItem("Short");
-        fTemps_cBox.addItem("Medium");
-        fTemps_cBox.addItem("Long");
         fTemps_cBox.addItem("Full");
-        
+        fTemps_cBox.addItem("Long");
+        fTemps_cBox.addItem("Medium");
+        fTemps_cBox.addItem("Short");
         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(accepter_Button)) {
-            
+            journalisteCourant.setFormat(SimpleDateFormat.getDateTimeInstance(fDate_cBox.getSelectedIndex(), 
+                    fTemps_cBox.getSelectedIndex(), ((LocaleCustom)pays_cBox.getSelectedItem()).locale));
+            this.dispose();
         }
         if(e.getSource().equals(annuler_Button))
             this.dispose();
