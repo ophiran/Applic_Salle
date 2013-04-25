@@ -54,7 +54,10 @@ public class DialLogin extends javax.swing.JDialog {
             this.dispose();
         }
         else
+        {
             new DialogErreur().setVisible(true);
+            this.dispose();
+        }
     }
 
     /**

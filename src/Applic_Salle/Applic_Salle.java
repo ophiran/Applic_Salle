@@ -64,8 +64,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(login_item)) {
             new DialLogin(this,rootPaneCheckingEnabled,mappingJournaliste).setVisible(true);
-            labelJournaliste.setText(journalisteConnecte.getLogin());
-            date_label.setText(journalisteConnecte.getFormat().format(date));
+            if (journalisteConnecte != null){
+                labelJournaliste.setText(journalisteConnecte.getLogin());
+                date_label.setText(journalisteConnecte.getFormat().format(date));
+            }
         }
         if(e.getSource().equals(about_item)){
             new DialAbout(this,rootPaneCheckingEnabled).setVisible(true);
