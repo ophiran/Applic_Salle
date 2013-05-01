@@ -1,5 +1,5 @@
-Applic_Salle
-============
+Applic_Salle + Applic_News
+==========================
 
 Applic salle du cours de java
 
