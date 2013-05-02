@@ -19,6 +19,8 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
     private NewsCounterBean compteurNews;
     private NetworkStringSender networkSender;
     private NetworkStringReceiver networkReceiver;
+    private int PortEcoute = 25679;
+    private int PortEmission = 25678;
     
     /**
      * Creates new form Applic_News
@@ -60,8 +62,9 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
             
         }
         if(e.getSource().equals(Connect_button)) {
-            networkReceiver = new NetworkStringReceiver(25679);
-            networkSender = new NetworkStringSender("127.0.0.1", 25678);
+            networkReceiver = new NetworkStringReceiver(PortEcoute);
+            networkSender = new NetworkStringSender("127.0.0.1", PortEcoute);
+            
             
         }
         if(e.getSource().equals(Deconnect_button)) {
