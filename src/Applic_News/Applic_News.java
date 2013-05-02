@@ -4,6 +4,8 @@
  */
 package Applic_News;
 
+import javax.swing.table.TableColumn;
+
 /**
  *
  * @author Ophiran
@@ -15,6 +17,17 @@ public class Applic_News extends javax.swing.JFrame {
      */
     public Applic_News() {
         initComponents();
+        
+        buttonGroup1.add(inter_rButton);
+        buttonGroup1.add(people_rButton);
+        buttonGroup1.add(politique_rButton);
+        buttonGroup1.add(sport_rButton);
+        
+        news_table.getColumnModel().getColumn(0).setHeaderValue("News");
+        news_table.getColumnModel().getColumn(1).setHeaderValue("Type");
+        news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
+        news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
+        
     }
 
     /**
