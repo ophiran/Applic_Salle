@@ -4,7 +4,7 @@
  */
 package libNews;
 
-import java.io.Serializable;
+
 import java.util.*;
 
 /**
