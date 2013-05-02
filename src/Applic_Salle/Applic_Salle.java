@@ -4,6 +4,7 @@
  */
 package Applic_Salle;
 
+import libNews.DialTraitement;
 import constantes.Categories;
 import libNews.News;
 import java.awt.event.*;
@@ -24,11 +25,11 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
      */
     public static Journaliste journalisteConnecte;
     ImplVerificateur mappingJournaliste = new ImplVerificateur();
-    public static DefaultComboBoxModel listeNewsATraiter = new DefaultComboBoxModel();
-    public static DefaultListModel listeNewsInter = new DefaultListModel();
-    public static DefaultListModel listeNewsSport = new DefaultListModel();
-    public static DefaultListModel listeNewsPolitique = new DefaultListModel();
-    public static Vector<News> listeNewsPeople = new Vector<News>();
+    public DefaultComboBoxModel listeNewsATraiter = new DefaultComboBoxModel();
+    public DefaultListModel listeNewsInter = new DefaultListModel();
+    public DefaultListModel listeNewsSport = new DefaultListModel();
+    public DefaultListModel listeNewsPolitique = new DefaultListModel();
+    public Vector<News> listeNewsPeople = new Vector<News>();
     public Date date = new Date();
     
     public Applic_Salle() {

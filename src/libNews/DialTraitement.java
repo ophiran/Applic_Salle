@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Applic_Salle;
+package libNews;
 
+import Applic_Salle.Journaliste;
 import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
