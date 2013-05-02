@@ -25,86 +25,86 @@ public class Applic_News extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        Connect_button = new javax.swing.JButton();
+        Deconnect_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        ville_label = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        journaliste_tBox = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        texte_tBox = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        politique_rButton = new javax.swing.JRadioButton();
+        inter_rButton = new javax.swing.JRadioButton();
+        sport_rButton = new javax.swing.JRadioButton();
+        people_rButton = new javax.swing.JRadioButton();
+        important_cBox = new javax.swing.JCheckBox();
+        enreg_button = new javax.swing.JButton();
+        env_button = new javax.swing.JButton();
+        annuler_button = new javax.swing.JButton();
+        news_scrollPane = new javax.swing.JScrollPane();
+        news_table = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        evenement_textArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 55, -1, -1));
+        Connect_button.setText("Se connecter");
+        getContentPane().add(Connect_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 55, -1, -1));
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 55, 125, -1));
+        Deconnect_button.setText("Se deconnecter");
+        getContentPane().add(Deconnect_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 55, 125, -1));
 
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 59, 116, -1));
+        jLabel1.setText("Nombre de news envoyees durant cette session:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 240, -1));
 
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 58, -1));
+        ville_label.setText("jLabel2");
+        getContentPane().add(ville_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 58, -1));
 
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 129, -1, -1));
+        jLabel3.setText("Journaliste:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 126, 160, -1));
+        journaliste_tBox.setText("jTextField1");
+        getContentPane().add(journaliste_tBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 126, 160, -1));
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Texte:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 167, -1, -1));
 
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 164, 250, -1));
+        texte_tBox.setText("jTextField2");
+        getContentPane().add(texte_tBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 164, 250, -1));
 
         jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 59, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, -1, -1));
 
-        jRadioButton1.setText("jRadioButton1");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        politique_rButton.setText("Politique");
+        getContentPane().add(politique_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
-        jRadioButton2.setText("jRadioButton2");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        inter_rButton.setText("International");
+        getContentPane().add(inter_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
-        jRadioButton3.setText("jRadioButton3");
-        getContentPane().add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        sport_rButton.setText("Sports");
+        getContentPane().add(sport_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
-        jRadioButton4.setText("jRadioButton4");
-        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+        people_rButton.setText("People et ragots");
+        getContentPane().add(people_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
-        jCheckBox1.setText("jCheckBox1");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 93, -1));
+        important_cBox.setText("Important");
+        getContentPane().add(important_cBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 93, -1));
 
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 148, -1));
+        enreg_button.setText("Enregistrer");
+        getContentPane().add(enreg_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 148, -1));
 
-        jButton4.setText("jButton4");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 148, -1));
+        env_button.setText("Envoyer");
+        getContentPane().add(env_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 148, -1));
 
-        jButton5.setText("jButton5");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, -1));
+        annuler_button.setText("Annuler");
+        getContentPane().add(annuler_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        news_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -115,16 +115,16 @@ public class Applic_News extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        news_scrollPane.setViewportView(news_table);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 360, 100));
+        getContentPane().add(news_scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 360, 100));
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText("Log des evenements:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        evenement_textArea.setColumns(20);
+        evenement_textArea.setRows(5);
+        jScrollPane2.setViewportView(evenement_textArea);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 360, 120));
 
@@ -166,27 +166,28 @@ public class Applic_News extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton Connect_button;
+    private javax.swing.JButton Deconnect_button;
+    private javax.swing.JButton annuler_button;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton enreg_button;
+    private javax.swing.JButton env_button;
+    private javax.swing.JTextArea evenement_textArea;
+    private javax.swing.JCheckBox important_cBox;
+    private javax.swing.JRadioButton inter_rButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField journaliste_tBox;
+    private javax.swing.JScrollPane news_scrollPane;
+    private javax.swing.JTable news_table;
+    private javax.swing.JRadioButton people_rButton;
+    private javax.swing.JRadioButton politique_rButton;
+    private javax.swing.JRadioButton sport_rButton;
+    private javax.swing.JTextField texte_tBox;
+    private javax.swing.JLabel ville_label;
     // End of variables declaration//GEN-END:variables
 }
