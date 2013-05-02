@@ -4,14 +4,22 @@
  */
 package Applic_News;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.table.TableColumn;
+import libNews.NewsCounterBean;
+import network.*;
 
 /**
  *
  * @author Ophiran
  */
-public class Applic_News extends javax.swing.JFrame {
+public class Applic_News extends javax.swing.JFrame implements ActionListener {
 
+    private NewsCounterBean compteurNews;
+    private NetworkStringSender networkSender;
+    private NetworkStringReceiver networkReceiver;
+    
     /**
      * Creates new form Applic_News
      */
@@ -28,6 +36,39 @@ public class Applic_News extends javax.swing.JFrame {
         news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
         news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
         
+        compteurNews = new NewsCounterBean(counter_label);
+        
+        enreg_button.addActionListener(this);
+        env_button.addActionListener(this);
+        annuler_button.addActionListener(this);
+        Connect_button.addActionListener(this);
+        Deconnect_button.addActionListener(this);
+        
+        
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(enreg_button)) {
+            
+        }
+        if(e.getSource().equals(env_button)) {
+            
+        }
+        if(e.getSource().equals(annuler_button)) {
+            
+        }
+        if(e.getSource().equals(Connect_button)) {
+            networkReceiver = new NetworkStringReceiver(25679);
+            networkSender = new NetworkStringSender("127.0.0.1", 25678);
+            
+        }
+        if(e.getSource().equals(Deconnect_button)) {
+            
+        }
+        
+                
     }
 
     /**
@@ -48,7 +89,7 @@ public class Applic_News extends javax.swing.JFrame {
         journaliste_tBox = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         texte_tBox = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        counter_label = new javax.swing.JLabel();
         politique_rButton = new javax.swing.JRadioButton();
         inter_rButton = new javax.swing.JRadioButton();
         sport_rButton = new javax.swing.JRadioButton();
@@ -73,7 +114,7 @@ public class Applic_News extends javax.swing.JFrame {
         getContentPane().add(Deconnect_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 55, 125, -1));
 
         jLabel1.setText("Nombre de news envoyees durant cette session:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 240, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 300, -1));
 
         ville_label.setText("jLabel2");
         getContentPane().add(ville_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 58, -1));
@@ -90,8 +131,8 @@ public class Applic_News extends javax.swing.JFrame {
         texte_tBox.setText("jTextField2");
         getContentPane().add(texte_tBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 164, 250, -1));
 
-        jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, -1, -1));
+        counter_label.setText("jLabel5");
+        getContentPane().add(counter_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
         politique_rButton.setText("Politique");
         getContentPane().add(politique_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
@@ -183,6 +224,7 @@ public class Applic_News extends javax.swing.JFrame {
     private javax.swing.JButton Deconnect_button;
     private javax.swing.JButton annuler_button;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel counter_label;
     private javax.swing.JButton enreg_button;
     private javax.swing.JButton env_button;
     private javax.swing.JTextArea evenement_textArea;
@@ -191,7 +233,6 @@ public class Applic_News extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField journaliste_tBox;
@@ -203,4 +244,6 @@ public class Applic_News extends javax.swing.JFrame {
     private javax.swing.JTextField texte_tBox;
     private javax.swing.JLabel ville_label;
     // End of variables declaration//GEN-END:variables
+
+    
 }
