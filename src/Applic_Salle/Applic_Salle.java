@@ -82,12 +82,79 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
                 listeNewsATraiter.addElement(new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, ""));
             }
             if(e.getSource().equals(traiter_button)){
-                new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte).setVisible(true);
+                News previousNews = (News)news_comboBox.getSelectedItem();
+                DialTraitement dialTrait = new DialTraitement(this, rootPaneCheckingEnabled,(News)news_comboBox.getSelectedItem(), journalisteConnecte);
+                dialTrait.setVisible(true);
+                if (dialTrait.isValidate)
+                {
+                    if(dialTrait.newsEdited.getType().equals(Categories.Internationale))
+                        listeNewsInter.addElement(dialTrait.newsEdited);
+                    if(dialTrait.newsEdited.getType().equals(Categories.Politique))
+                        listeNewsPolitique.addElement(dialTrait.newsEdited);
+                    if(dialTrait.newsEdited.getType().equals(Categories.Sport))
+                        listeNewsSport.addElement(dialTrait.newsEdited);
+                    if(dialTrait.newsEdited.getType().equals(Categories.People))
+                        listeNewsPeople.addElement(dialTrait.newsEdited);
+                    listeNewsATraiter.removeElement(previousNews);
+                }
             }
             if(e.getSource().equals(sup_button)){
                 listeNewsATraiter.removeElementAt(news_comboBox.getSelectedIndex());
             }
             if(e.getSource().equals(edit_button)){
+                News previousNews = new News("", journalisteConnecte, false, Categories.Internationale, "");
+                int indexNews = 0;
+                String type = Categories.Internationale;
+                try
+                {
+                    if (inter_rButton.isSelected())
+                    {
+                        indexNews = listInter.getSelectedIndex();
+                        type = Categories.Internationale;
+                        previousNews = (News)listeNewsInter.elementAt(indexNews);
+                    }
+                    if (sport_rButton.isSelected())
+                    {
+                        indexNews = listSport.getSelectedIndex();
+                        type = Categories.Sport;
+                        previousNews = (News)listeNewsSport.elementAt(indexNews);
+                    }
+                    if (pol_rButton.isSelected())
+                    {
+                        indexNews = listPolitique.getSelectedIndex();
+                        type = Categories.Politique;
+                        previousNews = (News)listeNewsPolitique.elementAt(indexNews);
+                    }
+                }
+                catch(ArrayIndexOutOfBoundsException except)
+                {
+                    
+                }
+                
+                if (!previousNews.getContenu().equals(""))
+                {
+                    DialTraitement dialTrait = new DialTraitement(this, rootPaneCheckingEnabled, previousNews, journalisteConnecte);
+                    dialTrait.setVisible(true);
+                    if (dialTrait.isValidate)
+                    {
+                        if(dialTrait.newsEdited.getType().equals(Categories.Internationale))
+                            listeNewsInter.addElement(dialTrait.newsEdited);
+                        if(dialTrait.newsEdited.getType().equals(Categories.Politique))
+                            listeNewsPolitique.addElement(dialTrait.newsEdited);
+                        if(dialTrait.newsEdited.getType().equals(Categories.Sport))
+                            listeNewsSport.addElement(dialTrait.newsEdited);
+                        if(dialTrait.newsEdited.getType().equals(Categories.People))
+                            listeNewsPeople.addElement(dialTrait.newsEdited);
+
+                        if(type.equals(Categories.Internationale))
+                            listeNewsInter.removeElementAt(indexNews);
+                        if(type.equals(Categories.Politique))
+                            listeNewsPolitique.removeElementAt(indexNews);
+                        if(type.equals(Categories.Sport))
+                            listeNewsSport.removeElementAt(indexNews);
+
+                    }
+                }
             }
             if(e.getSource().equals(date_item)){
                 new DialDate(this,rootPaneCheckingEnabled,journalisteConnecte).setVisible(true);
