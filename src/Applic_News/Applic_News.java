@@ -38,14 +38,14 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
         news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
         
-        compteurNews = new NewsCounterBean(counter_label);
+        compteurNews = new NewsCounterBean();
+        compteurNews.setCounterLabel(counter_label);
         
         enreg_button.addActionListener(this);
         env_button.addActionListener(this);
         annuler_button.addActionListener(this);
         Connect_button.addActionListener(this);
         Deconnect_button.addActionListener(this);
-        
         
         
     }

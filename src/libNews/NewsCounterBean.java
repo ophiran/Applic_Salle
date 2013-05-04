@@ -15,8 +15,8 @@ public class NewsCounterBean {
     private int counter = 0;
     private JLabel label;
     
-    public NewsCounterBean(JLabel label) {
-        this.label = label;
+    public NewsCounterBean() {
+        setCounterLabel(null);
         setNewsNumber(counter);
     }
     
@@ -26,7 +26,12 @@ public class NewsCounterBean {
     
     public void setNewsNumber(int counter) {
         this.counter = counter;
-        label.setText(String.valueOf(counter));
+        if(label != null)
+            label.setText(String.valueOf(counter));
+    }
+    
+    public void setCounterLabel(JLabel label){
+        this.label = label;
     }
     
     

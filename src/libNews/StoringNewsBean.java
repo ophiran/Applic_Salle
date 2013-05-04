@@ -12,5 +12,15 @@ import java.util.*;
  * @author Ophiran
  */
 public class StoringNewsBean{
-    public Vector<News> newsList = new Vector<News>();
+    private Vector<News> newsList = new Vector<News>();
+    
+    public StoringNewsBean() {
+        
+    }
+    
+    public void addNews(News news) {
+        
+    }
+    
+    
 }
