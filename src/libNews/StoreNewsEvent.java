@@ -4,12 +4,14 @@
  */
 package libNews;
 
-import java.util.EventListener;
+import java.util.EventObject;
 
 /**
  *
  * @author Ophiran
  */
-public interface NewsListener extends EventListener{
-    public void newsDetected();
+public class StoreNewsEvent extends EventObject{
+    public StoreNewsEvent(Object o){
+        super(o);
+    }
 }

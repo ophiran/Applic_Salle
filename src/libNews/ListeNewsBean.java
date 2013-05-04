@@ -4,25 +4,15 @@
  */
 package libNews;
 
-
-import java.util.*;
-
 /**
  *
  * @author Ophiran
  */
-public class StoringNewsBean implements StoreNewsListener{
-    private Vector<News> newsList = new Vector<News>();
-    
-    public StoringNewsBean() {
-        
-    }
-    
+public class ListeNewsBean implements NewsListener {
 
     @Override
-    public void StoreNewsDetected() {
+    public void newsDetected() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }
