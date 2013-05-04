@@ -4,10 +4,12 @@
  */
 package libNews;
 
+import java.util.EventListener;
+
 /**
  *
  * @author Ophiran
  */
-public interface NewsListener {
+public interface NewsListener extends EventListener{
     
 }
