@@ -5,12 +5,13 @@
 package libNews;
 import Applic_Salle.Journaliste;
 import constantes.Categories;
+import java.io.*;
 /**
  *
  * @author ekimd_000
  */
 
-public class News {
+public class News implements Serializable{
     
     private String contenu;
     private Journaliste auteur;
@@ -80,6 +81,26 @@ public class News {
             return "I - " + contenu;
         else
             return "N - " + contenu;
+    }
+    
+    public String toStringNetwork(){
+        
+        ByteArrayOutputStream serByteStream = new ByteArrayOutputStream();
+        try
+        {
+        ObjectOutputStream out = new ObjectOutputStream(serByteStream);
+        out.writeObject(this);
+        out.close();
+        
+        } catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+        return serByteStream.toString();
+    }
+    
+    public static News toNewsNetwork(String source){
+        return new News("",new Journaliste("","","",""),false,"","");
     }
 
 
