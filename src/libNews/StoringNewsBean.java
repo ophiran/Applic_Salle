@@ -5,6 +5,7 @@
 package libNews;
 
 
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 /**
@@ -13,6 +14,7 @@ import java.util.*;
  */
 public class StoringNewsBean implements StoreNewsListener{
     private Vector<News> newsList = new Vector<News>();
+    protected PropertyChangeSupport propertyHandling = new PropertyChangeSupport(this);
     
     public StoringNewsBean() {
         
