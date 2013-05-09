@@ -11,7 +11,18 @@ import java.util.EventObject;
  * @author Ophiran
  */
 public class NewsEvent extends EventObject {
-    public NewsEvent(Object o){
-        super(o);
+    private String news;
+    private String localisation;
+    
+    public NewsEvent(Object source,String news,String localisation){
+        super(source);
+    }
+    
+    public String getNews(){
+        return news;
+    }
+    
+    public String getLocalisation(){
+        return localisation;
     }
 }
