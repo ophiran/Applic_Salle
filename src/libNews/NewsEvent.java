@@ -16,6 +16,8 @@ public class NewsEvent extends EventObject {
     
     public NewsEvent(Object source,String news,String localisation){
         super(source);
+        this.news = news;
+        this.localisation = localisation;
     }
     
     public String getNews(){
