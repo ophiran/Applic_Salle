@@ -13,12 +13,13 @@ import java.io.*;
 
 public class News implements Serializable{
     
-    private String contenu;
     private Journaliste auteur;
+    private String contenu;
     private boolean importance;
     private String type;
     private String motsCles;
     private String commentaires;
+    
   
     public String getContenu(){
         return contenu;
@@ -83,15 +84,21 @@ public class News implements Serializable{
             return "N - " + contenu;
     }
     
+    
+    public String toStringNet(){
+        String retString = new String();
+        retString = auteur.toString() + "~" + contenu + "~" + importance + "~" + type + "~" + motsCles + "~" + commentaires;
+        return retString;
+    }
+    
     public String toStringNetwork(){
         
         ByteArrayOutputStream serByteStream = new ByteArrayOutputStream();
         try
         {
-        ObjectOutputStream out = new ObjectOutputStream(serByteStream);
-        out.writeObject(this);
-        out.close();
-        
+            ObjectOutputStream out = new ObjectOutputStream(serByteStream);
+            out.writeObject(this);
+            out.close();
         } catch(IOException ioe)
         {
             ioe.printStackTrace();
