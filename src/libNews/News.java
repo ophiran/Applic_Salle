@@ -86,11 +86,10 @@ public class News implements Serializable{
     
     
     public String toStringNet(){
-        String retString = new String();
-        retString = auteur.toString() + "~" + contenu + "~" + importance + "~" + type + "~" + motsCles + "~" + commentaires;
-        return retString;
+        return auteur.getLogin() + "~" + contenu + "~" + importance + "~" + type;
     }
-    
+   
+    /*
     public String toStringNetwork(){
         
         ByteArrayOutputStream serByteStream = new ByteArrayOutputStream();
@@ -108,7 +107,7 @@ public class News implements Serializable{
     
     public static News toNewsNetwork(String source){
         return new News("",new Journaliste("","","",""),false,"","");
-    }
+    }*/
 
 
 }
