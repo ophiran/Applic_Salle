@@ -108,58 +108,40 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         evenement_textArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Connect_button.setText("Se connecter");
-        getContentPane().add(Connect_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 55, -1, -1));
 
         Deconnect_button.setText("Se deconnecter");
-        getContentPane().add(Deconnect_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 55, 125, -1));
 
         jLabel1.setText("Nombre de news envoyees durant cette session:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 300, -1));
 
         ville_label.setText("jLabel2");
-        getContentPane().add(ville_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 58, -1));
 
         jLabel3.setText("Journaliste:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         journaliste_tBox.setText("jTextField1");
-        getContentPane().add(journaliste_tBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 126, 160, -1));
 
         jLabel4.setText("Texte:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 167, -1, -1));
 
         texte_tBox.setText("jTextField2");
-        getContentPane().add(texte_tBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 164, 250, -1));
 
         counter_label.setText("jLabel5");
-        getContentPane().add(counter_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
         politique_rButton.setText("Politique");
-        getContentPane().add(politique_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         inter_rButton.setText("International");
-        getContentPane().add(inter_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         sport_rButton.setText("Sports");
-        getContentPane().add(sport_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
         people_rButton.setText("People et ragots");
-        getContentPane().add(people_rButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         important_cBox.setText("Important");
-        getContentPane().add(important_cBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 93, -1));
 
         enreg_button.setText("Enregistrer");
-        getContentPane().add(enreg_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 148, -1));
 
         env_button.setText("Envoyer");
-        getContentPane().add(env_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 148, -1));
 
         annuler_button.setText("Annuler");
-        getContentPane().add(annuler_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, -1));
 
         news_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,16 +156,113 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         ));
         news_scrollPane.setViewportView(news_table);
 
-        getContentPane().add(news_scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 360, 100));
-
         jLabel6.setText("Log des evenements:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
 
         evenement_textArea.setColumns(20);
         evenement_textArea.setRows(5);
         jScrollPane2.setViewportView(evenement_textArea);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 360, 120));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(ville_label, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addComponent(Connect_button)
+                .addGap(24, 24, 24)
+                .addComponent(Deconnect_button, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(counter_label))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(journaliste_tBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texte_tBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(news_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(politique_rButton)
+                    .addComponent(inter_rButton)
+                    .addComponent(sport_rButton)
+                    .addComponent(people_rButton)
+                    .addComponent(important_cBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enreg_button, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(env_button, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(annuler_button, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(140, 140, 140)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(ville_label))
+                    .addComponent(Connect_button)
+                    .addComponent(Deconnect_button)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(counter_label)))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3)
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(journaliste_tBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(texte_tBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(news_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(politique_rButton)
+                        .addGap(7, 7, 7)
+                        .addComponent(inter_rButton)
+                        .addGap(7, 7, 7)
+                        .addComponent(sport_rButton)
+                        .addGap(7, 7, 7)
+                        .addComponent(people_rButton)
+                        .addGap(7, 7, 7)
+                        .addComponent(important_cBox))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(enreg_button)
+                                .addGap(17, 17, 17)
+                                .addComponent(env_button)
+                                .addGap(27, 27, 27)
+                                .addComponent(annuler_button))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
