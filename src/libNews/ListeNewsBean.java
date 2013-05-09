@@ -11,7 +11,7 @@ package libNews;
 public class ListeNewsBean implements NewsListener {
 
     @Override
-    public void newsDetected() {
+    public void newsDetected(NewsEvent n) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
