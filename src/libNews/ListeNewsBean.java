@@ -4,15 +4,27 @@
  */
 package libNews;
 
+import java.util.Vector;
+
 /**
  *
  * @author Ophiran
  */
 public class ListeNewsBean implements NewsListener {
-
-    @Override
-    public void newsDetected(NewsEvent n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Vector<NotifyNewsListener> mailingList;
+    
+    public ListeNewsBean(){
+        mailingList = new Vector<NotifyNewsListener>();
     }
     
+    @Override
+    public void newsDetected(NewsEvent e) {
+        for (NotifyNewsListener n: mailingList){
+            n.notifyNewsDetected(new NotifyNewsEvent(this, e.getLocalisation() + ";" + e.getNews()));
+        }
+    }
+    
+    public void AddNotifyNewsListener(NotifyNewsListener n){
+        mailingList.add(n);
+    }
 }

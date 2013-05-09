@@ -11,7 +11,10 @@ import java.util.EventObject;
  * @author Ophiran
  */
 public class NotifyNewsEvent extends EventObject{
-    public NotifyNewsEvent(Object o){
+    protected String news;
+    
+    public NotifyNewsEvent(Object o, String news){
         super(o);
+        this.news = news;
     }
 }

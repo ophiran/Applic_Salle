@@ -6,7 +6,7 @@ package Applic_Salle;
 
 import libNews.DialTraitement;
 import constantes.Categories;
-import libNews.News;
+import libNews.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.DefaultListModel;
@@ -18,7 +18,7 @@ import people.dialogs.*;
  *
  * @author Ophiran
  */
-public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
+public class Applic_Salle extends javax.swing.JFrame implements ActionListener, NotifyNewsListener{
 
     /**
      * Creates new form Applic_Salle
@@ -60,6 +60,15 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener{
         listeNewsATraiter.addElement(new News("News Bidon 2", journalisteConnecte, true, Categories.Internationale, ""));
         listeNewsATraiter.addElement(new News("News Bidon 3", journalisteConnecte, false, Categories.People, ""));
     }
+    @Override
+    public void notifyNewsDetected(NotifyNewsEvent e){
+    
+        //TODO
+        //new DiagNewNews();
+        
+    }
+    
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
