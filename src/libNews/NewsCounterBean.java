@@ -4,19 +4,21 @@
  */
 package libNews;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JLabel;
 
 /**
  *
  * @author Ophiran
  */
-public class NewsCounterBean {
+public class NewsCounterBean implements PropertyChangeListener{
     
     private int counter = 0;
     private JLabel label;
     
-    public NewsCounterBean(JLabel label) {
-        this.label = label;
+    public NewsCounterBean() {
+        setCounterLabel(null);
         setNewsNumber(counter);
     }
     
@@ -26,7 +28,17 @@ public class NewsCounterBean {
     
     public void setNewsNumber(int counter) {
         this.counter = counter;
-        label.setText(String.valueOf(counter));
+        if(label != null)
+            label.setText(String.valueOf(counter));
+    }
+    
+    public void setCounterLabel(JLabel label){
+        this.label = label;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
