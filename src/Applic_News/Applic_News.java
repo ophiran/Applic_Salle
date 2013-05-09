@@ -4,10 +4,14 @@
  */
 package Applic_News;
 
+import Applic_Salle.Journaliste;
+import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import libNews.NewsCounterBean;
+import libNews.*;
 import network.*;
 
 /**
@@ -53,7 +57,8 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(enreg_button)) {
-            
+            News newNews = new News(texte_tBox.getText(),new Journaliste("","",journaliste_tBox.getText(),""),important_cBox.isSelected(),Categories.Internationale,"");
+            DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
         }
         if(e.getSource().equals(env_button)) {
             
