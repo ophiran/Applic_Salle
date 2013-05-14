@@ -8,9 +8,7 @@ import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 import libNews.*;
 import network.*;
 
