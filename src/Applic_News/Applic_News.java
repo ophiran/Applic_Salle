@@ -100,7 +100,12 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
             
         }
         if(e.getSource().equals(Connect_button)) {
-            networkSender = new NetworkStringSender("127.0.0.1", PortEmission);
+            try {
+                networkSender = new NetworkStringSender("127.0.0.1", PortEmission);
+            } catch (Exception ex)
+            {
+                ex.printStackTrace(System.out);
+            }
         }
         if(e.getSource().equals(Deconnect_button)) {
             networkSender.endSending();
