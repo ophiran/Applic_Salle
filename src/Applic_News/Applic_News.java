@@ -4,28 +4,26 @@
  */
 package Applic_News;
 
-import Applic_Salle.Journaliste;
-import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.Vector;
-import javax.swing.ButtonModel;
 import javax.swing.table.*;
 import libNews.*;
 import network.*;
 
+
+
 /**
  *
  * @author Ophiran
+ * @author Ekym
  */
 public class Applic_News extends javax.swing.JFrame implements ActionListener {
 
     private NewsCounterBean compteurNews;
     private NetworkStringSender networkSender;
-    private NetworkStringReceiver networkReceiver;
-    private int PortEcoute = 25679;
     private int PortEmission = 25678;
-    
     /**
      * Creates new form Applic_News
      */
@@ -45,6 +43,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
      
         
+        ville_label.setText(Locale.getDefault().getDisplayCountry());
         
         compteurNews = new NewsCounterBean();
         compteurNews.setCounterLabel(counter_label);
@@ -55,7 +54,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         Connect_button.addActionListener(this);
         Deconnect_button.addActionListener(this);
         
-        
+        System.getProperties().list(System.out); //DEBUG
     }
     
     @Override
@@ -78,21 +77,33 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
                 newNews.add("NON");
             newNews.add(journaliste_tBox.getText());
             dtm.addRow(newNews);
+            //Indiquer via un property change ou un setter pour le NewsCounterBean
+            compteurNews.setNewsNumber(compteurNews.getNewsNumber()+1);
+            
         }
         if(e.getSource().equals(env_button)) {
-            
+            if(networkSender != null
+               && (news_table.getSelectedRowCount() == 1)){
+                DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
+                String stringtosend = new String();
+                for(int i = 0;i<news_table.getColumnCount();i++){
+                    stringtosend += dtm.getValueAt(news_table.getSelectedRow(), i);
+                    stringtosend += "~";
+                }
+                networkSender.sendString(stringtosend);
+                compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
+                dtm.removeRow(news_table.getSelectedRow());
+            }
         }
         if(e.getSource().equals(annuler_button)) {
             
         }
         if(e.getSource().equals(Connect_button)) {
-            networkReceiver = new NetworkStringReceiver(PortEcoute);
-            networkSender = new NetworkStringSender("127.0.0.1", PortEcoute);
-            
-            
+            networkSender = new NetworkStringSender("127.0.0.1", PortEmission);
         }
         if(e.getSource().equals(Deconnect_button)) {
-            
+            networkSender.endSending();
+            networkSender = null;
         }
         
                 
@@ -192,8 +203,8 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(ville_label, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addComponent(ville_label, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(Connect_button)
                 .addGap(24, 24, 24)
                 .addComponent(Deconnect_button, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,19 +246,21 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(ville_label))
-                    .addComponent(Connect_button)
-                    .addComponent(Deconnect_button)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Connect_button)
+                            .addComponent(Deconnect_button)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(counter_label))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(counter_label)))
+                        .addGap(59, 59, 59)
+                        .addComponent(ville_label)))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()

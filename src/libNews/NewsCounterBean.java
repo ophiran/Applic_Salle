@@ -22,6 +22,11 @@ public class NewsCounterBean implements PropertyChangeListener{
         setNewsNumber(counter);
     }
     
+    public NewsCounterBean(JLabel label){
+        setCounterLabel(label);
+        setNewsNumber(counter);
+    }
+    
     public int getNewsNumber() {
         return counter;
     }
