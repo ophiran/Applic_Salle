@@ -4,6 +4,7 @@
  */
 package Applic_News;
 
+import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
@@ -64,13 +65,13 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
             Vector<String> newNews = new Vector<>();
             newNews.add(texte_tBox.getText());
             if(sport_rButton.isSelected())
-                newNews.add("Sport");
+                newNews.add(Categories.Sport);
             else if(politique_rButton.isSelected())
-                newNews.add("Politique");
+                newNews.add(Categories.Politique);
             else if(people_rButton.isSelected())
-                newNews.add("People");
+                newNews.add(Categories.People);
             else
-                newNews.add("International");
+                newNews.add(Categories.Internationale);
             if(important_cBox.isSelected())
                 newNews.add("OUI");
             else
@@ -91,8 +92,8 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
                     stringtosend += "~";
                 }
                 networkSender.sendString(stringtosend);
-                compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
                 dtm.removeRow(news_table.getSelectedRow());
+                compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
             }
         }
         if(e.getSource().equals(annuler_button)) {
