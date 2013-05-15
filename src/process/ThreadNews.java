@@ -18,9 +18,9 @@ public class ThreadNews extends Thread{
     protected int sleepTime;
     static protected Vector<NewsListener> mailingList;
     
-    public ThreadNews(int sleepTime){
+    public ThreadNews(int sleepTime, int port){
         receiver = new NetworkStringReceiver(listeningPort);
-        listeningPort = 25678;
+        listeningPort = port;
         mailingList = new Vector<NewsListener>();
         this.sleepTime = sleepTime;
     }

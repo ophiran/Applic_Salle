@@ -86,7 +86,12 @@ public class News implements Serializable{
     
     
     public String toStringNet(){
-        return auteur.getLogin() + "~" + contenu + "~" + importance + "~" + type;
+        String sImportance;
+        if(importance)
+            sImportance = "true";
+        else
+            sImportance = "false";
+        return auteur.getLogin() + "~" + contenu + "~" + sImportance + "~" + type;
     }
    
     /*

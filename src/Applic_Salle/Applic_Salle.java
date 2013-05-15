@@ -11,8 +11,10 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import people.*;
 import people.dialogs.*;
+import process.ThreadNews;
 
 /**
  *
@@ -31,9 +33,22 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     public DefaultListModel listeNewsPolitique = new DefaultListModel();
     public Vector<News> listeNewsPeople = new Vector<News>();
     public Date date = new Date();
+    protected Vector<ThreadNews> poolThreads = new Vector<ThreadNews>();
+    protected ListeNewsBean detectNewNews = new ListeNewsBean();
     
     public Applic_Salle() {
         initComponents();
+        for(int i = 0 ; i < 5 ; i++){
+            poolThreads.add(new ThreadNews(1000, 25678+i));
+        }
+        
+        poolThreads.firstElement().AddNewsListener(detectNewNews);
+        
+        for(ThreadNews tn: poolThreads){
+            tn.start();
+        }
+        
+        detectNewNews.AddNotifyNewsListener(this);
         
         rButtonGroup.add(inter_rButton);
         rButtonGroup.add(pol_rButton);
@@ -62,10 +77,19 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     }
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
-    
-        //TODO
-        //new DiagNewNews();
-        
+        System.out.println("A news has been received");
+        JOptionPane.showMessageDialog(this, "A news has been received", "News received", JOptionPane.INFORMATION_MESSAGE);
+        String news[] = e.getNews().split("~");
+        String contenu = news[1];
+        boolean importance;
+        if (news[2].equals("true"))
+            importance = true;
+        else
+            importance = false;
+        String type = news[3];
+        Journaliste auteur = mappingJournaliste.getJournaliste(news[0]);
+        if(auteur != null)
+            listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
     }
     
     

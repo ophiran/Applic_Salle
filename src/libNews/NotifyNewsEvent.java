@@ -11,10 +11,20 @@ import java.util.EventObject;
  * @author Ophiran
  */
 public class NotifyNewsEvent extends EventObject{
-    protected String news;
+    protected String localisationAndNews;
     
-    public NotifyNewsEvent(Object o, String news){
+    public String getNews(){
+        String news[] = localisationAndNews.split(";");
+        return news[1];
+    }
+    
+    public String getLocalisation(){
+        String news[] = localisationAndNews.split(";");
+        return news[0];
+    }
+    
+    public NotifyNewsEvent(Object o, String localisationAndNews){
         super(o);
-        this.news = news;
+        this.localisationAndNews = localisationAndNews;
     }
 }
