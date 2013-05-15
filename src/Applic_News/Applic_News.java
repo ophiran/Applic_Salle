@@ -87,14 +87,11 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
                && (news_table.getSelectedRowCount() == 1)){
                 DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
                 String stringtosend = new String();
+                stringtosend += "UneVille;";
                 for(int i = 0;i<news_table.getColumnCount();i++){
                     stringtosend += dtm.getValueAt(news_table.getSelectedRow(), i);
-                    if(i == (news_table.getColumnCount()-1))
-                        stringtosend += ";";
-                    else
-                        stringtosend += "~";
+                    stringtosend += "~";
                 }
-                stringtosend += "UneVille";
                 networkSender.sendString(stringtosend);
                 dtm.removeRow(news_table.getSelectedRow());
                 compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
