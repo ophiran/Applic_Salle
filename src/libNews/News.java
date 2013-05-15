@@ -91,9 +91,8 @@ public class News implements Serializable{
             sImportance = "true";
         else
             sImportance = "false";
-        return auteur.getLogin() + "~" + contenu + "~" + sImportance + "~" + type;
+        return contenu + "~" + type + "~" + sImportance + "~" + auteur.getLogin();
     }
-   
     /*
     public String toStringNetwork(){
         

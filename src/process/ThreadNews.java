@@ -39,7 +39,7 @@ public class ThreadNews extends Thread{
                 String tok[] = receivedString.split(";");
                 localisation = tok[0];
                 news = tok[1];
-                NewsEvent newsEvent = new NewsEvent(this, localisation, news);
+                NewsEvent newsEvent = new NewsEvent(this, news, localisation);
                 for(NewsListener n: mailingList){
                     n.newsDetected(newsEvent);
                 }

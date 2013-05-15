@@ -80,14 +80,22 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         System.out.println("A news has been received");
         JOptionPane.showMessageDialog(this, "A news has been received", "News received", JOptionPane.INFORMATION_MESSAGE);
         String news[] = e.getNews().split("~");
-        String contenu = news[1];
+        String contenu = news[0];
+        System.out.println(contenu);
+        
         boolean importance;
-        if (news[2].equals("true"))
+        if (news[2].equals("OUI"))
             importance = true;
         else
             importance = false;
-        String type = news[3];
-        Journaliste auteur = mappingJournaliste.getJournaliste(news[0]);
+        System.out.println(importance);
+        
+        String type = news[1];
+        System.out.println(type);
+        
+        Journaliste auteur = mappingJournaliste.getJournaliste(news[3]);
+        System.out.println(auteur.toString());
+        
         if(auteur != null)
             listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
     }
