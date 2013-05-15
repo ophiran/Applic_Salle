@@ -19,8 +19,8 @@ public class ThreadNews extends Thread{
     static protected Vector<NewsListener> mailingList;
     
     public ThreadNews(int sleepTime, int port){
-        receiver = new NetworkStringReceiver(listeningPort);
         listeningPort = port;
+        receiver = new NetworkStringReceiver(listeningPort);
         mailingList = new Vector<NewsListener>();
         this.sleepTime = sleepTime;
     }
@@ -36,9 +36,9 @@ public class ThreadNews extends Thread{
                     receivedString = receiver.getMessage();
                     sleep(sleepTime);
                 }while(receivedString.equals("RIEN"));
-                StringTokenizer tok = new StringTokenizer(receivedString, ";");
-                localisation = tok.nextToken();
-                news = tok.nextToken();
+                String tok[] = receivedString.split(";");
+                localisation = tok[0];
+                news = tok[1];
                 NewsEvent newsEvent = new NewsEvent(this, localisation, news);
                 for(NewsListener n: mailingList){
                     n.newsDetected(newsEvent);
