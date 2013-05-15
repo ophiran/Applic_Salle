@@ -89,8 +89,12 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
                 String stringtosend = new String();
                 for(int i = 0;i<news_table.getColumnCount();i++){
                     stringtosend += dtm.getValueAt(news_table.getSelectedRow(), i);
-                    stringtosend += "~";
+                    if(i == (news_table.getColumnCount()-1))
+                        stringtosend += ";";
+                    else
+                        stringtosend += "~";
                 }
+                stringtosend += "UneVille";
                 networkSender.sendString(stringtosend);
                 dtm.removeRow(news_table.getSelectedRow());
                 compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
