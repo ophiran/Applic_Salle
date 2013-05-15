@@ -8,6 +8,8 @@ import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.swing.ButtonModel;
 import javax.swing.table.*;
 import libNews.*;
 import network.*;
@@ -34,11 +36,15 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         buttonGroup1.add(people_rButton);
         buttonGroup1.add(politique_rButton);
         buttonGroup1.add(sport_rButton);
+        politique_rButton.setSelected(true);
         
+        ((DefaultTableModel) news_table.getModel()).setRowCount(0);
         news_table.getColumnModel().getColumn(0).setHeaderValue("News");
         news_table.getColumnModel().getColumn(1).setHeaderValue("Type");
         news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
         news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
+     
+        
         
         compteurNews = new NewsCounterBean();
         compteurNews.setCounterLabel(counter_label);
@@ -55,8 +61,23 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(enreg_button)) {
-            News newNews = new News(texte_tBox.getText(),new Journaliste("","",journaliste_tBox.getText(),""),important_cBox.isSelected(),Categories.Internationale,"");
             DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
+            Vector<String> newNews = new Vector<>();
+            newNews.add(texte_tBox.getText());
+            if(sport_rButton.isSelected())
+                newNews.add("Sport");
+            else if(politique_rButton.isSelected())
+                newNews.add("Politique");
+            else if(people_rButton.isSelected())
+                newNews.add("People");
+            else
+                newNews.add("International");
+            if(important_cBox.isSelected())
+                newNews.add("OUI");
+            else
+                newNews.add("NON");
+            newNews.add(journaliste_tBox.getText());
+            dtm.addRow(newNews);
         }
         if(e.getSource().equals(env_button)) {
             
