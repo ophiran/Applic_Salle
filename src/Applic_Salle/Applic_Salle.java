@@ -38,15 +38,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     
     public Applic_Salle() {
         initComponents();
-        for(int i = 0 ; i < 5 ; i++){
-            poolThreads.add(new ThreadNews(1000, 25678+i));
-        }
-        
-        poolThreads.firstElement().AddNewsListener(detectNewNews);
-        
-        for(ThreadNews tn: poolThreads){
-            tn.start();
-        }
         
         detectNewNews.AddNotifyNewsListener(this);
         
@@ -62,6 +53,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         about_item.addActionListener(this);
         sup_button.addActionListener(this);
         edit_button.addActionListener(this);
+        dRecept_item.addActionListener(this);
+        aRecept_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -71,9 +64,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         listSport.setModel(listeNewsSport);
         
         news_comboBox.setModel(listeNewsATraiter);
-        listeNewsATraiter.addElement(new News("News Bidon 1", journalisteConnecte, false, Categories.Internationale, ""));
-        listeNewsATraiter.addElement(new News("News Bidon 2", journalisteConnecte, true, Categories.Internationale, ""));
-        listeNewsATraiter.addElement(new News("News Bidon 3", journalisteConnecte, false, Categories.People, ""));
     }
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
@@ -81,26 +71,22 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         JOptionPane.showMessageDialog(this, "A news has been received", "News received", JOptionPane.INFORMATION_MESSAGE);
         String news[] = e.getNews().split("~");
         String contenu = news[0];
-        System.out.println(contenu);
         
         boolean importance;
         if (news[2].equals("OUI"))
             importance = true;
         else
             importance = false;
-        System.out.println(importance);
         
         String type = news[1];
-        System.out.println(type);
         
         Journaliste auteur = mappingJournaliste.getJournaliste(news[3]);
-        System.out.println(auteur.toString());
         
         try{
             listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
         }
         catch(NullPointerException npe){
-            //npe.printStackTrace();
+            npe.printStackTrace();
         }
     }
     
@@ -205,6 +191,24 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             if(e.getSource().equals(date_item)){
                 new DialDate(this,rootPaneCheckingEnabled,journalisteConnecte).setVisible(true);
                 date_label.setText(journalisteConnecte.getFormat().format(date));
+            }
+            if(e.getSource().equals(dRecept_item)){
+                for(int i = 0 ; i < 5 ; i++){
+                    poolThreads.add(new ThreadNews(1000, 25678+i));
+                }
+
+                poolThreads.firstElement().AddNewsListener(detectNewNews);
+
+                for(ThreadNews tn: poolThreads){
+                    tn.start();
+                }
+            }
+            if(e.getSource().equals(aRecept_item)){
+                
+                for(ThreadNews tn: poolThreads){
+                    tn.interrupt();
+                }
+                poolThreads.clear();
             }
 
         }

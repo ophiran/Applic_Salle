@@ -61,6 +61,8 @@ public class News implements Serializable{
         
     public News(String contenu, Journaliste auteur, boolean importance, String type, String commentaires){
         this.contenu = contenu;
+        if (auteur == null)
+            throw new NullPointerException();
         this.auteur = auteur;
         this.importance = importance;
         if(type.equals(Categories.Internationale) || type.equals(Categories.People) ||

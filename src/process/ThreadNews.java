@@ -34,6 +34,7 @@ public class ThreadNews extends Thread{
                 String localisation;
                 do{
                     receivedString = receiver.getMessage();
+                    System.out.println(receivedString);
                     sleep(sleepTime);
                 }while(receivedString.equals("RIEN"));
                 String tok[] = receivedString.split(";");
@@ -45,7 +46,7 @@ public class ThreadNews extends Thread{
                 }
             }
         }
-        catch (InterruptedException e){ 
+        catch (InterruptedException e){
             return; 
         }
     }
