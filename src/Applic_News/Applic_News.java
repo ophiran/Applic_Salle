@@ -83,23 +83,18 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
             
         }
         if(e.getSource().equals(env_button)) {
-            try{
-            //if(networkSender != null
-               //&& (news_table.getSelectedRowCount() == 1)){
+            if(networkSender != null
+               && (news_table.getSelectedRowCount() == 1)){
                 DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
                 String stringtosend = new String();
                 stringtosend += "UneVille;";
                 for(int i = 0;i<news_table.getColumnCount();i++){
                     stringtosend += dtm.getValueAt(news_table.getSelectedRow(), i);
-                    
                     stringtosend += "~";
                 }
                 networkSender.sendString(stringtosend);
                 dtm.removeRow(news_table.getSelectedRow());
                 compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
-            //}
-            }catch(Exception ex){
-                System.out.println("erreur");
             }
         }
         if(e.getSource().equals(annuler_button)) {
