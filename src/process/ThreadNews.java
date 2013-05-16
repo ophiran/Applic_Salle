@@ -17,6 +17,7 @@ public class ThreadNews extends Thread{
     protected int listeningPort;
     protected int sleepTime;
     static protected Vector<NewsListener> mailingList;
+    public Boolean mustWait = true;
     
     public ThreadNews(int sleepTime, int port){
         listeningPort = port;
@@ -29,29 +30,33 @@ public class ThreadNews extends Thread{
     public void run(){
         try{
             while(true){
-                String receivedString;
-                String news;
-                String localisation;
-                do{
+                if(!mustWait){
+                    String receivedString;
+                    String news;
+                    String localisation;
                     receivedString = receiver.getMessage();
-                    System.out.println(receivedString);
-                    sleep(sleepTime);
-                }while(receivedString.equals("RIEN"));
-                String tok[] = receivedString.split(";");
-                localisation = tok[0];
-                news = tok[1];
-                NewsEvent newsEvent = new NewsEvent(this, news, localisation);
-                for(NewsListener n: mailingList){
-                    n.newsDetected(newsEvent);
+                    if (!receivedString.equals("RIEN")){
+                        String tok[] = receivedString.split(";");
+                        localisation = tok[0];
+                        news = tok[1];
+                        NewsEvent newsEvent = new NewsEvent(this, news, localisation);
+                        for(NewsListener n: mailingList){
+                            n.newsDetected(newsEvent);
+                        }
+                    }
+                    else
+                        sleep(sleepTime);
                 }
+                sleep(sleepTime);
             }
+
         }
         catch (InterruptedException e){
-            return; 
         }
+
     }
     
-    public void AddNewsListener(NewsListener n){
+    public static void AddNewsListener(NewsListener n){
         mailingList.add(n);
     }
         

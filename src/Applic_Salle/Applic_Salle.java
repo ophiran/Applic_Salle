@@ -9,6 +9,8 @@ import constantes.Categories;
 import libNews.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -38,6 +40,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     
     public Applic_Salle() {
         initComponents();
+        for(int i = 0 ; i < 5 ; i++){
+            poolThreads.add(new ThreadNews(1000, 25678+i));
+        }
+        for(ThreadNews t:poolThreads){
+            t.start();
+        }
+        ThreadNews.AddNewsListener(detectNewNews);
         
         detectNewNews.AddNotifyNewsListener(this);
         
@@ -193,22 +202,15 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 date_label.setText(journalisteConnecte.getFormat().format(date));
             }
             if(e.getSource().equals(dRecept_item)){
-                for(int i = 0 ; i < 5 ; i++){
-                    poolThreads.add(new ThreadNews(1000, 25678+i));
-                }
-
-                poolThreads.firstElement().AddNewsListener(detectNewNews);
-
                 for(ThreadNews tn: poolThreads){
-                    tn.start();
+                    tn.mustWait = false;
                 }
             }
             if(e.getSource().equals(aRecept_item)){
                 
                 for(ThreadNews tn: poolThreads){
-                    tn.interrupt();
+                    tn.mustWait = true;
                 }
-                poolThreads.clear();
             }
 
         }
