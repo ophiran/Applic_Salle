@@ -96,8 +96,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         Journaliste auteur = mappingJournaliste.getJournaliste(news[3]);
         System.out.println(auteur.toString());
         
-        if(auteur != null)
+        try{
             listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
+        }
+        catch(NullPointerException npe){
+            //npe.printStackTrace();
+        }
     }
     
     
