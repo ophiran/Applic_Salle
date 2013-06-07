@@ -29,6 +29,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     private int PortEmission = 25678;
     private Properties propriete;
     private ThreadRandomGenerator threadRandomGen; 
+    private FichierLog log;
     /**
      * Creates new form Applic_News
      */
