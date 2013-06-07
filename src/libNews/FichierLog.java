@@ -17,19 +17,29 @@ public class FichierLog {
 		this.textArea = textArea;
 	}
 	
+	private void readLog()
+	{
+		try{
+			FileReader file = new FileReader(path);
+			textArea.read(file, null);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void addLine(String log) {
 		if(textArea != null)
 			textArea.append(log);
-		try
-		{
+		try {
 			FileWriter file = new FileWriter(path, true);
 			BufferedWriter buffer = new BufferedWriter(file);
 			buffer.write(log);
 			buffer.newLine();
 			buffer.close();
 		}
-		catch(IOException e)
-		{
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
