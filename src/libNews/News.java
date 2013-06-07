@@ -19,6 +19,7 @@ public class News implements Serializable{
     private String type;
     private String motsCles;
     private String commentaires;
+    private boolean valid = false;
     
   
     public String getContenu(){
@@ -57,6 +58,10 @@ public class News implements Serializable{
     }
     public void setCommentaires(String s){
         commentaires = s;
+    }
+    
+    public void setValidation(boolean valid){
+    	this.valid = valid;
     }
         
     public News(String contenu, Journaliste auteur, boolean importance, String type, String commentaires){

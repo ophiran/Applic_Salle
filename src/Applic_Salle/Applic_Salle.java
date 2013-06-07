@@ -14,13 +14,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import people.*;
-import people.dialogs.*;
 import process.ThreadNews;
 
 /**
@@ -44,6 +40,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     protected ListeNewsBean detectNewNews = new ListeNewsBean();
     private Properties propriete;
     
+    private Vector<StoreNewsListener> mailinglistStoreNews = new Vector<>();
+    private StoringNewsBean listeNews = new StoringNewsBean();
+    
     public Applic_Salle() {
         initComponents();
         propriete = new Properties();
@@ -57,26 +56,26 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         }
         catch(FileNotFoundException e)
         {
-            try 
-            {
-                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                        + "ApplicSalle");
-                tmpFile.mkdirs();
-
-                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
-
+        	try {
+        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle");
+        		tmpFile.mkdirs();
+        		
+				FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+				
                 propriete.put("propertiesName", "");
                 propriete.put("SerializationName", "journalistes");
                 propriete.put("RefNumbers", "");
-                propriete.put("LogFile", "ApplicLog.log");
-                propriete.store(file, "");
-
-            } 
-            catch (IOException e1) 
-            {
-                e1.printStackTrace();
-            }
+				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle" + System.getProperty("file.separator") + "ApplicLog.log");
+				propriete.put("NewsFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
+				propriete.store(file, "");
+				
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
         }
         catch(IOException e)
         {
@@ -119,6 +118,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         
         news_comboBox.setModel(listeNewsATraiter);
         
+        listeNews.setPath(propriete.getProperty("NewsFile"));
+        mailinglistStoreNews.add(listeNews);
+        
         
         
     }
@@ -140,7 +142,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         Journaliste auteur = mappingJournaliste.getJournaliste(news[3]);
         
         try{
-            listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
+        	
+        	News tmpNews = new News(contenu, auteur, importance, type, "");
+            listeNewsATraiter.addElement(tmpNews);
+            for(StoreNewsListener item : mailinglistStoreNews) {
+            	item.StoreNewsDetected(new StoreNewsEvent(this, tmpNews,true));
+            }
+            
         }
         catch(NullPointerException npe){
             System.out.println("Le journaliste " + news[3] + " n'est pas enregistre");
@@ -168,7 +176,11 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 date_label.setText("Déconnecté");
             }
             if(e.getSource().equals(ajouter_button)){
-                listeNewsATraiter.addElement(new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, ""));
+            	News tmpNews = new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, "");
+                listeNewsATraiter.addElement(tmpNews);
+                for(StoreNewsListener item : mailinglistStoreNews) {
+                	item.StoreNewsDetected(new StoreNewsEvent(this, tmpNews,true));
+                }
             }
             if(e.getSource().equals(traiter_button)){
                 News previousNews = (News)news_comboBox.getSelectedItem();
@@ -184,11 +196,22 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                         listeNewsSport.addElement(dialTrait.newsEdited);
                     if(dialTrait.newsEdited.getType().equals(Categories.People))
                         listeNewsPeople.addElement(dialTrait.newsEdited);
+                    
+                    for(StoreNewsListener item : mailinglistStoreNews) {
+                    	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,false));
+                    	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,true));
+                    }
                     listeNewsATraiter.removeElement(previousNews);
                 }
             }
             if(e.getSource().equals(sup_button)){
+            	
+            	for(StoreNewsListener item : mailinglistStoreNews) {
+                	item.StoreNewsDetected(new StoreNewsEvent(this, (News)news_comboBox.getSelectedItem() ,false));
+                }
+            	
                 listeNewsATraiter.removeElementAt(news_comboBox.getSelectedIndex());
+                
             }
             if(e.getSource().equals(edit_button)){
                 News previousNews = new News("", journalisteConnecte, false, Categories.Internationale, "");

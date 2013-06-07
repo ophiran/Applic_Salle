@@ -4,6 +4,7 @@
  */
 package Applic_Salle;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
@@ -15,9 +16,8 @@ import people.*;
  *
  * @author Ophiran
  */
+public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable,Serializable{
 
-public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable{
-    
     private String login;
     private String password;
     private String id;
@@ -25,7 +25,7 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
     
     public Journaliste(String nom,String prenom,String login,String password)
     {
-        this(nom,prenom,login,password,"Administrateur");
+        this(nom,prenom,login,password,"");
     }
     
     public Journaliste(String nom,String prenom,String login,String password,String id)

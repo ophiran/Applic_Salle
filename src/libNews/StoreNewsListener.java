@@ -11,5 +11,5 @@ import java.util.EventListener;
  * @author Ophiran
  */
 public interface StoreNewsListener extends EventListener{
-    public void StoreNewsDetected();
+    public void StoreNewsDetected(StoreNewsEvent e);
 }
