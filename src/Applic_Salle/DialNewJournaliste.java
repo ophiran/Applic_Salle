@@ -36,7 +36,6 @@ public class DialNewJournaliste extends javax.swing.JDialog implements ActionLis
                     login_textfield.getText(), password_textfield.getText(), id);
             isValidated = true;
             this.dispose();
-            System.out.println("DEBUGs");//DEBUG
         }
         if(e.getSource().equals(annuler_button)){
             isValidated = false;

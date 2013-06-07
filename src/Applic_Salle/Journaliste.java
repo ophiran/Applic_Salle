@@ -16,7 +16,7 @@ import people.*;
  *
  * @author Ophiran
  */
-public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable,Serializable{
+public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable, Serializable{
 
     private String login;
     private String password;
@@ -25,7 +25,7 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
     
     public Journaliste(String nom,String prenom,String login,String password)
     {
-        this(nom,prenom,login,password,"");
+        this(nom,prenom,login,password,"Normal");
     }
     
     public Journaliste(String nom,String prenom,String login,String password,String id)
@@ -38,6 +38,10 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
         dateFormat = DateFormat.getDateInstance();
     }
     
+    public String toString()
+    {
+        return login;
+    }
     public void setFormat(DateFormat dateFormat)
     {
         this.dateFormat = dateFormat;

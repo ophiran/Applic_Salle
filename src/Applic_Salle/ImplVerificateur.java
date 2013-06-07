@@ -23,7 +23,7 @@ import people.*;
  */
 public class ImplVerificateur extends Verificateur implements Serializable{
 
-    private HashMap<String,Journaliste> JournalisteListe = new HashMap();
+    public HashMap<String,Journaliste> JournalisteListe = new HashMap();
     private String path;
     
     public ImplVerificateur()
@@ -53,7 +53,7 @@ public class ImplVerificateur extends Verificateur implements Serializable{
         }
         catch(FileNotFoundException e)
         {
-            this.AddJournaliste(new Journaliste("nom","prenom","login","test","Administrateur"));
+            this.AddJournaliste(new Journaliste("login","login","login","test","Administrateur"));
         }
         catch(IOException e)
         {

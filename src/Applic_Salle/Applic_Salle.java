@@ -56,14 +56,14 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         }
         catch(FileNotFoundException e)
         {
-        	try {
-                    File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                            + "ApplicSalle");
-                    tmpFile.mkdirs();
+            try {
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                        + "ApplicSalle");
+                tmpFile.mkdirs();
 
-                            FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                            + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
-				
+                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+
                 propriete.put("propertiesName", "");
                 propriete.put("SerializationName", "journalistes");
                 propriete.put("RefNumbers", "");
@@ -73,9 +73,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                                 + "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
                 propriete.store(file, "");
 
-                } catch (IOException e1) {
-                        e1.printStackTrace();
-                }
+            } catch (IOException e1) {
+                    e1.printStackTrace();
+            }
         }
         catch(IOException e)
         {
@@ -288,8 +288,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 }
             }
             
-            if(journalisteConnecte.getId().equals("Administrateur") 
-                    && e.getSource().equals(nouveau_item)){
+            if(e.getSource().equals(nouveau_item) && journalisteConnecte.getId().equals("Administrateur")){
                 DialNewJournaliste dialJourn = new DialNewJournaliste(this, rootPaneCheckingEnabled);
                 dialJourn.setVisible(true);
                 if(dialJourn.isValidated){
@@ -299,7 +298,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             }
             
             if(e.getSource().equals(liste_item)){
-                
+                DialListeJournalistes d = new DialListeJournalistes(this, rootPaneCheckingEnabled, mappingJournaliste.JournalisteListe);
+                d.setVisible(true);
             }
         }
     }
