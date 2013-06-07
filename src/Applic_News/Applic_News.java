@@ -28,6 +28,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     private NetworkStringSender networkSender;
     private int PortEmission = 25678;
     private Properties propriete;
+    private FichierLog log;
     /**
      * Creates new form Applic_News
      */
@@ -83,7 +84,8 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
 				propriete.put("propertiesName", "");
 				propriete.put("SerializationName", "");
 				propriete.put("RefNumbers", "");
-				propriete.put("LogFile", "ApplicLog.log");
+				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicNews" + System.getProperty("file.separator") +  "ApplicLog.log");
 				propriete.store(file, "");
 				
 			} catch (IOException e1) {
@@ -95,6 +97,11 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
         	
         	e.printStackTrace();
         }
+        
+        log = new FichierLog();
+        log.setJTextArea(evenement_textArea);
+        log.setLogPath(propriete.getProperty("LogFile"));
+        
         
     }
     
@@ -120,6 +127,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
             dtm.addRow(newNews);
             //Indiquer via un property change ou un setter pour le NewsCounterBean
             compteurNews.setNewsNumber(compteurNews.getNewsNumber()+1);
+            log.addLine("Une news enregistree (" + journaliste_tBox.getText() + ")");
             
         }
         if(e.getSource().equals(env_button)) {
@@ -136,6 +144,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
                 networkSender.sendString(stringtosend);
                 dtm.removeRow(news_table.getSelectedRow());
                 compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
+                log.addLine("News envoyee");
             //}
             } catch(Exception ex) {
                 System.out.println("ERREUR ENVOIE");

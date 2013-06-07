@@ -15,13 +15,24 @@ public class FichierLog {
 	
 	public void setJTextArea(JTextArea textArea) {
 		this.textArea = textArea;
+		if(path != null)
+			readLog();
+	}
+	
+	public void setLogPath(String path){
+		this.path = path;
+		if(textArea != null)
+			readLog();
 	}
 	
 	private void readLog()
 	{
 		try{
-			FileReader file = new FileReader(path);
-			textArea.read(file, null);
+			File tmpFile = new File(path);
+			if(tmpFile.exists()){
+				FileReader file = new FileReader(path);
+				textArea.read(file, null);
+			}
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -31,12 +42,13 @@ public class FichierLog {
 	
 	public void addLine(String log) {
 		if(textArea != null)
-			textArea.append(log);
+		{
+			textArea.append(log + "\n");
+		}
 		try {
 			FileWriter file = new FileWriter(path, true);
 			BufferedWriter buffer = new BufferedWriter(file);
 			buffer.write(log);
-			buffer.newLine();
 			buffer.close();
 		}
 		catch(IOException e) {
