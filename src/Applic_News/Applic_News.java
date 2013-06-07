@@ -36,33 +36,6 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     public Applic_News() {
         initComponents();
         
-        ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, 17, 4);
-        threadRandomGen.start();
-
-        buttonGroup1.add(inter_rButton);
-        buttonGroup1.add(people_rButton);
-        buttonGroup1.add(politique_rButton);
-        buttonGroup1.add(sport_rButton);
-        politique_rButton.setSelected(true);
-        
-        ((DefaultTableModel) news_table.getModel()).setRowCount(0);
-        news_table.getColumnModel().getColumn(0).setHeaderValue("News");
-        news_table.getColumnModel().getColumn(1).setHeaderValue("Type");
-        news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
-        news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
-     
-        
-        ville_label.setText(Locale.getDefault().getDisplayCountry());
-        
-        compteurNews = new NewsCounterBean();
-        compteurNews.setCounterLabel(counter_label);
-        
-        enreg_button.addActionListener(this);
-        env_button.addActionListener(this);
-        annuler_button.addActionListener(this);
-        Connect_button.addActionListener(this);
-        Deconnect_button.addActionListener(this);
-        
         propriete = new Properties();
         try
         {
@@ -87,6 +60,13 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
 				propriete.put("RefNumbers", "");
 				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
 						+ "ApplicNews" + System.getProperty("file.separator") +  "ApplicLog.log");
+                                propriete.put("Town", "");
+                                propriete.put("Liege", "25678");
+                                propriete.put("Amsterdam", "25679");
+                                propriete.put("London", "25680");
+                                propriete.put("Montreal", "25681");
+                                propriete.put("New-York", "25682");
+                                propriete.put("Istanbul", "25683");
 				propriete.store(file, "");
 				
 			} catch (IOException e1) {
@@ -98,6 +78,34 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
         	
         	e.printStackTrace();
         }
+        
+        ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, 17, 4);
+        threadRandomGen.start();
+
+        buttonGroup1.add(inter_rButton);
+        buttonGroup1.add(people_rButton);
+        buttonGroup1.add(politique_rButton);
+        buttonGroup1.add(sport_rButton);
+        politique_rButton.setSelected(true);
+        
+        ((DefaultTableModel) news_table.getModel()).setRowCount(0);
+        news_table.getColumnModel().getColumn(0).setHeaderValue("News");
+        news_table.getColumnModel().getColumn(1).setHeaderValue("Type");
+        news_table.getColumnModel().getColumn(2).setHeaderValue("Important ?");
+        news_table.getColumnModel().getColumn(3).setHeaderValue("Journaliste");
+        
+        compteurNews = new NewsCounterBean();
+        compteurNews.setCounterLabel(counter_label);
+        
+        enreg_button.addActionListener(this);
+        env_button.addActionListener(this);
+        annuler_button.addActionListener(this);
+        Connect_button.addActionListener(this);
+        Deconnect_button.addActionListener(this);
+        
+        
+        
+        ville_label.setText(propriete.getProperty("Town"));
         
         log = new FichierLog();
         log.setJTextArea(evenement_textArea);
@@ -137,7 +145,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
                //&& (news_table.getSelectedRowCount() == 1)){
                 DefaultTableModel dtm = (DefaultTableModel) news_table.getModel();
                 String stringtosend = new String();
-                stringtosend += "UneVille;";
+                stringtosend += propriete.getProperty("Town") + ";";
                 for(int i = 0;i<news_table.getColumnCount();i++){
                     stringtosend += dtm.getValueAt(news_table.getSelectedRow(), i);
                     stringtosend += "~";
@@ -173,7 +181,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     }
     
     public String getIdentifiant(){
-        return "IDNews1";
+        return propriete.getProperty("Town");
     }
     
     public void traiteNombre(int n){

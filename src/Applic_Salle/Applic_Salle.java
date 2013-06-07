@@ -46,40 +46,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     
     public Applic_Salle() {
         initComponents();
-        for(int i = 0 ; i < 5 ; i++){
-            poolThreads.add(new ThreadNews(1000, 25678+i));
-        }
-        for(ThreadNews t:poolThreads){
-            t.start();
-        }
-        ThreadNews.AddNewsListener(detectNewNews);
-        
-        detectNewNews.AddNotifyNewsListener(this);
-        
-        rButtonGroup.add(inter_rButton);
-        rButtonGroup.add(pol_rButton);
-        rButtonGroup.add(sport_rButton);
-        
-        login_item.addActionListener(this);
-        logout_item.addActionListener(this);
-        ajouter_button.addActionListener(this);
-        traiter_button.addActionListener(this);
-        date_item.addActionListener(this);
-        about_item.addActionListener(this);
-        sup_button.addActionListener(this);
-        edit_button.addActionListener(this);
-        dRecept_item.addActionListener(this);
-        aRecept_item.addActionListener(this);
-        labelJournaliste.setText("Deconnected");
-        date_label.setText("Deconnected");
-
-        
-        listInter.setModel(listeNewsInter);
-        listPolitique.setModel(listeNewsPolitique);
-        listSport.setModel(listeNewsSport);
-        
-        news_comboBox.setModel(listeNewsATraiter);
-        
         propriete = new Properties();
         try
         {
@@ -114,6 +80,42 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         	
         	e.printStackTrace();
         }
+        
+        for(int i = 0 ; i < 5 ; i++){
+            poolThreads.add(new ThreadNews(1000, 25678+i));
+        }
+        for(ThreadNews t:poolThreads){
+            t.start();
+        }
+        ThreadNews.AddNewsListener(detectNewNews);
+        
+        detectNewNews.AddNotifyNewsListener(this);
+        
+        rButtonGroup.add(inter_rButton);
+        rButtonGroup.add(pol_rButton);
+        rButtonGroup.add(sport_rButton);
+        
+        login_item.addActionListener(this);
+        logout_item.addActionListener(this);
+        ajouter_button.addActionListener(this);
+        traiter_button.addActionListener(this);
+        date_item.addActionListener(this);
+        about_item.addActionListener(this);
+        sup_button.addActionListener(this);
+        edit_button.addActionListener(this);
+        dRecept_item.addActionListener(this);
+        aRecept_item.addActionListener(this);
+        labelJournaliste.setText("Deconnected");
+        date_label.setText("Deconnected");
+
+        
+        listInter.setModel(listeNewsInter);
+        listPolitique.setModel(listeNewsPolitique);
+        listSport.setModel(listeNewsSport);
+        
+        news_comboBox.setModel(listeNewsATraiter);
+        
+        
         
     }
     @Override
