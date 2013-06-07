@@ -28,6 +28,16 @@ public class ImplVerificateur extends Verificateur implements Serializable{
     
     public ImplVerificateur()
     {
+        
+    }
+    
+    public void SetPath(String path)
+    {
+       this.path = path; 
+       
+    }
+    public void Deserialize()
+    {
         try
         {
             File file = new File(path);
@@ -50,13 +60,7 @@ public class ImplVerificateur extends Verificateur implements Serializable{
             e.printStackTrace();
         }
     }
-    
-    public void SetPath(String path)
-    {
-       this.path = path; 
-       
-    }
-    public void Serialiser()
+    public void Serialize()
     {
         try{
             File file = new File(path);

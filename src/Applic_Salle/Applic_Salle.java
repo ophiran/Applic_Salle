@@ -57,30 +57,34 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         catch(FileNotFoundException e)
         {
         	try {
-        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle");
-        		tmpFile.mkdirs();
-        		
-				FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+                    File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                            + "ApplicSalle");
+                    tmpFile.mkdirs();
+
+                            FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                            + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
 				
                 propriete.put("propertiesName", "");
                 propriete.put("SerializationName", "journalistes");
                 propriete.put("RefNumbers", "");
-				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle" + System.getProperty("file.separator") + "ApplicLog.log");
-				propriete.put("NewsFile",System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
-				propriete.store(file, "");
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+                propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "ApplicLog.log");
+                propriete.put("NewsFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
+                propriete.store(file, "");
+
+                } catch (IOException e1) {
+                        e1.printStackTrace();
+                }
         }
         catch(IOException e)
         {
             e.printStackTrace();
         }
+        
+        mappingJournaliste.SetPath(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + propriete.getProperty("SerializationName"));
+        mappingJournaliste.Deserialize();
         
         for(int i = 0 ; i < 5 ; i++){
             poolThreads.add(new ThreadNews(1000, 25678+i));
@@ -286,7 +290,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             
             if(journalisteConnecte.getId().equals("Administrateur") 
                     && e.getSource().equals(nouveau_item)){
-                //mappingJournaliste.AddJournaliste(labelJournaliste);
+                DialNewJournaliste dialJourn = new DialNewJournaliste(this, rootPaneCheckingEnabled);
+                dialJourn.setVisible(true);
+                if(dialJourn.isValidated){
+                    mappingJournaliste.AddJournaliste(dialJourn.newJournaliste);
+                    mappingJournaliste.Serialize();
+                }
             }
             
             if(e.getSource().equals(liste_item)){
