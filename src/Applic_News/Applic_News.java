@@ -57,7 +57,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
 				
 				propriete.put("propertiesName", "");
 				propriete.put("SerializationName", "");
-				propriete.put("RefNumbers", "");
+				propriete.put("RefNumber", "17");
 				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
 						+ "ApplicNews" + System.getProperty("file.separator") +  "ApplicLog.log");
                                 propriete.put("Town", "");
@@ -79,7 +79,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
         	e.printStackTrace();
         }
         
-        ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, 17, 4);
+        ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, Integer.parseInt(propriete.getProperty("RefNumber")), 4);
         threadRandomGen.start();
 
         buttonGroup1.add(inter_rButton);

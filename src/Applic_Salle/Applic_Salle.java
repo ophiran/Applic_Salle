@@ -49,36 +49,38 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         propriete = new Properties();
         try
         {
-        	FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
-        			+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
-        	propriete.load(file);
-        	file.close();
+            FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+                            + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+            propriete.load(file);
+            file.close();
         	
         }
         catch(FileNotFoundException e)
         {
-        	try {
-        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle");
-        		tmpFile.mkdirs();
-        		
-				FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
-						+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
-				
-				propriete.put("propertiesName", "");
-				propriete.put("SerializationName", "");
-				propriete.put("RefNumbers", "");
-				propriete.put("LogFile", "ApplicLog.log");
-				propriete.store(file, "");
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+            try 
+            {
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                        + "ApplicSalle");
+                tmpFile.mkdirs();
+
+                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+
+                propriete.put("propertiesName", "");
+                propriete.put("SerializationName", "journalistes");
+                propriete.put("RefNumbers", "");
+                propriete.put("LogFile", "ApplicLog.log");
+                propriete.store(file, "");
+
+            } 
+            catch (IOException e1) 
+            {
+                e1.printStackTrace();
+            }
         }
         catch(IOException e)
         {
-        	
-        	e.printStackTrace();
+            e.printStackTrace();
         }
         
         for(int i = 0 ; i < 5 ; i++){
@@ -105,6 +107,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         edit_button.addActionListener(this);
         dRecept_item.addActionListener(this);
         aRecept_item.addActionListener(this);
+        nouveau_item.addActionListener(this);
+        liste_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -256,7 +260,15 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                     tn.mustWait = true;
                 }
             }
-
+            
+            if(journalisteConnecte.getId().equals("Administrateur") 
+                    && e.getSource().equals(nouveau_item)){
+                //mappingJournaliste.AddJournaliste(labelJournaliste);
+            }
+            
+            if(e.getSource().equals(liste_item)){
+                
+            }
         }
     }
 
@@ -298,7 +310,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         logout_item = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         nouveau_item = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        liste_item = new javax.swing.JMenuItem();
         connexions_menu = new javax.swing.JMenu();
         dRecept_item = new javax.swing.JMenuItem();
         aRecept_item = new javax.swing.JMenuItem();
@@ -377,8 +389,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         nouveau_item.setText("Nouveau");
         util_menu.add(nouveau_item);
 
-        jMenuItem3.setText("Liste");
-        util_menu.add(jMenuItem3);
+        liste_item.setText("Liste");
+        util_menu.add(liste_item);
 
         jMenuBar1.add(util_menu);
 
@@ -585,7 +597,6 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel jName_label;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -598,6 +609,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     private javax.swing.JList listInter;
     private javax.swing.JList listPolitique;
     private javax.swing.JList listSport;
+    private javax.swing.JMenuItem liste_item;
     private javax.swing.JMenuItem log_item;
     private javax.swing.JMenuItem login_item;
     private javax.swing.JMenuItem logout_item;

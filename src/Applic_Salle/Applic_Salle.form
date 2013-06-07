@@ -28,7 +28,7 @@
                 <Property name="text" type="java.lang.String" value="Nouveau"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="liste_item">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Liste"/>
               </Properties>

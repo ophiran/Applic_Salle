@@ -4,6 +4,16 @@
  */
 package Applic_Salle;
 
+import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import people.*;
 
@@ -11,15 +21,55 @@ import people.*;
  *
  * @author Ophiran
  */
-public class ImplVerificateur extends Verificateur{
+public class ImplVerificateur extends Verificateur implements Serializable{
 
     private HashMap<String,Journaliste> JournalisteListe = new HashMap();
+    private String path;
     
     public ImplVerificateur()
     {
-        this.AddJournaliste(new Journaliste("nom","prenom","login","test"));
+        try
+        {
+            File file = new File(path);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            JournalisteListe = (HashMap<String, Journaliste>)ois.readObject();
+            ois.close();
+        	
+        }
+        catch(ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch(FileNotFoundException e)
+        {
+            this.AddJournaliste(new Journaliste("nom","prenom","login","test","Administrateur"));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     
+    public void SetPath(String path)
+    {
+       this.path = path; 
+       
+    }
+    public void Serialiser()
+    {
+        try{
+            File file = new File(path);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(JournalisteListe);
+            oos.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void AddJournaliste(Journaliste journaliste)
     {
         JournalisteListe.put(journaliste.getLogin(), journaliste);

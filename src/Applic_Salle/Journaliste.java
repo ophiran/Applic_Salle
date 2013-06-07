@@ -15,8 +15,9 @@ import people.*;
  *
  * @author Ophiran
  */
-public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable{
 
+public class Journaliste extends Personne implements Utilisateur, Identifiable, Cloneable{
+    
     private String login;
     private String password;
     private String id;
@@ -24,7 +25,7 @@ public class Journaliste extends Personne implements Utilisateur, Identifiable, 
     
     public Journaliste(String nom,String prenom,String login,String password)
     {
-        this(nom,prenom,login,password,"");
+        this(nom,prenom,login,password,"Administrateur");
     }
     
     public Journaliste(String nom,String prenom,String login,String password,String id)
