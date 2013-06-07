@@ -8,6 +8,11 @@ import libNews.DialTraitement;
 import constantes.Categories;
 import libNews.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +42,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     public Date date = new Date();
     protected Vector<ThreadNews> poolThreads = new Vector<ThreadNews>();
     protected ListeNewsBean detectNewNews = new ListeNewsBean();
+    private Properties propriete;
     
     public Applic_Salle() {
         initComponents();
@@ -73,6 +79,42 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         listSport.setModel(listeNewsSport);
         
         news_comboBox.setModel(listeNewsATraiter);
+        
+        propriete = new Properties();
+        try
+        {
+        	FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+        			+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+        	propriete.load(file);
+        	file.close();
+        	
+        }
+        catch(FileNotFoundException e)
+        {
+        	try {
+        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle");
+        		tmpFile.mkdirs();
+        		
+				FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
+				
+				propriete.put("propertiesName", "");
+				propriete.put("SerializationName", "");
+				propriete.put("RefNumbers", "");
+				propriete.put("LogFile", "ApplicLog.log");
+				propriete.store(file, "");
+				
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+        }
+        catch(IOException e)
+        {
+        	
+        	e.printStackTrace();
+        }
+        
     }
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
