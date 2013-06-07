@@ -49,6 +49,7 @@ public class FichierLog {
 			FileWriter file = new FileWriter(path, true);
 			BufferedWriter buffer = new BufferedWriter(file);
 			buffer.write(log);
+			buffer.newLine();
 			buffer.close();
 		}
 		catch(IOException e) {
