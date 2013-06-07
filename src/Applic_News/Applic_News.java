@@ -28,14 +28,15 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     private NetworkStringSender networkSender;
     private int PortEmission = 25678;
     private Properties propriete;
+    private ThreadRandomGenerator threadRandomGen; 
     /**
      * Creates new form Applic_News
      */
     public Applic_News() {
         initComponents();
         
-        ThreadRandomGenerator trg = new ThreadRandomGenerator(this , 0, 50, 17, 4);
-        trg.start();
+        ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, 17, 4);
+        threadRandomGen.start();
 
         buttonGroup1.add(inter_rButton);
         buttonGroup1.add(people_rButton);
@@ -138,7 +139,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
                 compteurNews.setNewsNumber(compteurNews.getNewsNumber()-1);
             //}
             } catch(Exception ex) {
-                System.out.println("ERREUR ENVOIE");
+                System.out.println("Erreur d'envoie");
             }
         }
         if(e.getSource().equals(annuler_button)) {
@@ -153,8 +154,10 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
             }
         }
         if(e.getSource().equals(Deconnect_button)) {
-            networkSender.endSending();
-            networkSender = null;
+            if (networkSender != null){
+                networkSender.endSending();
+                networkSender = null;
+            }
         }
         
                 
@@ -167,6 +170,10 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     public void traiteNombre(int n){
         JOptionPane.showMessageDialog(this, "Alarme: Veuillez fermer l'application", "Probleme sur une ligne",
             JOptionPane.WARNING_MESSAGE,null);
+        if (networkSender != null){
+            networkSender.endSending();
+            networkSender = null;
+        }
         
     }
     

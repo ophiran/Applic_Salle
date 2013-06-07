@@ -18,6 +18,7 @@ public class ThreadNews extends Thread{
     protected int sleepTime;
     static protected Vector<NewsListener> mailingList;
     public Boolean mustWait = true;
+    public Boolean finished = false;
     
     public ThreadNews(int sleepTime, int port){
         listeningPort = port;
@@ -29,7 +30,7 @@ public class ThreadNews extends Thread{
     @Override
     public void run(){
         try{
-            while(true){
+            while(!finished){
                 if(!mustWait){
                     String receivedString;
                     String news;

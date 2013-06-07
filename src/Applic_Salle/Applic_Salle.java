@@ -137,7 +137,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             listeNewsATraiter.addElement(new News(contenu, auteur, importance, type, ""));
         }
         catch(NullPointerException npe){
-            npe.printStackTrace();
+            System.out.println("Le journaliste " + news[3] + " n'est pas enregistre");
         }
     }
     
