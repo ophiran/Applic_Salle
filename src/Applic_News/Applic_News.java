@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.table.*;
+import javax.swing.JOptionPane;
 import libNews.*;
 import network.*;
+import threadsutils.*;
 
 
 
@@ -20,17 +22,18 @@ import network.*;
  * @author Ophiran
  * @author Ekym
  */
-public class Applic_News extends javax.swing.JFrame implements ActionListener {
+public class Applic_News extends javax.swing.JFrame implements ActionListener, UtilisateurNombre {
 
     private NewsCounterBean compteurNews;
     private NetworkStringSender networkSender;
     private int PortEmission = 25678;
-    /**
-     * Creates new form Applic_News
-     */
+
     public Applic_News() {
         initComponents();
         
+        ThreadRandomGenerator trg = new ThreadRandomGenerator(this , 0, 50, 17, 4);
+        trg.start();
+
         buttonGroup1.add(inter_rButton);
         buttonGroup1.add(people_rButton);
         buttonGroup1.add(politique_rButton);
@@ -119,6 +122,17 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener {
         
                 
     }
+    
+    public String getIdentifiant(){
+        return "IDNews1";
+    }
+    
+    public void traiteNombre(int n){
+        JOptionPane.showMessageDialog(this, "Alarme: Veuillez fermer l'application", "Probleme sur une ligne",
+            JOptionPane.WARNING_MESSAGE,null);
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

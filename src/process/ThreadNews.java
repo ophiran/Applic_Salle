@@ -59,7 +59,4 @@ public class ThreadNews extends Thread{
     public static void AddNewsListener(NewsListener n){
         mailingList.add(n);
     }
-        
-        
-        
 }
