@@ -7,8 +7,8 @@ package Applic_News;
 import constantes.Categories;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
-import java.util.Vector;
+import java.io.*;
+import java.util.*;
 import javax.swing.table.*;
 import javax.swing.JOptionPane;
 import libNews.*;
@@ -27,7 +27,10 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     private NewsCounterBean compteurNews;
     private NetworkStringSender networkSender;
     private int PortEmission = 25678;
-
+    private Properties propriete;
+    /**
+     * Creates new form Applic_News
+     */
     public Applic_News() {
         initComponents();
         
@@ -58,7 +61,41 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
         Connect_button.addActionListener(this);
         Deconnect_button.addActionListener(this);
         
-        System.getProperties().list(System.out); //DEBUG
+        propriete = new Properties();
+        try
+        {
+        	FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+        			+ "ApplicNews" + System.getProperty("file.separator") + "PropertiesNews.properties");
+        	propriete.load(file);
+        	file.close();
+        	
+        }
+        catch(FileNotFoundException e)
+        {
+        	try {
+        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicNews");
+        		tmpFile.mkdirs();
+        		
+				FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+						+ "ApplicNews" + System.getProperty("file.separator") + "PropertiesNews.properties");
+				
+				propriete.put("propertiesName", "");
+				propriete.put("SerializationName", "");
+				propriete.put("RefNumbers", "");
+				propriete.put("LogFile", "ApplicLog.log");
+				propriete.store(file, "");
+				
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+        }
+        catch(IOException e)
+        {
+        	
+        	e.printStackTrace();
+        }
+        
     }
     
     @Override
