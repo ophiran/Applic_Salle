@@ -5,6 +5,7 @@
 package libNews;
 
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,10 +33,14 @@ public class StoringNewsBean implements StoreNewsListener{
 
     @Override
     public void StoreNewsDetected(StoreNewsEvent e) {
-    	if(e.getOperation())
+    	if(e.getOperation()){
     		newsList.add(e.getNews());
-    	else
+    		propertyHandling.firePropertyChange("AjoutNews", null, e.getNews());
+    	}
+    	else {
     		newsList.remove(e.getNews());
+    		propertyHandling.firePropertyChange("SupNews", e.getNews(), null);
+    	}
     	writeNews();
     }
     
@@ -79,5 +84,13 @@ public class StoringNewsBean implements StoreNewsListener{
     
     public Vector<News> getNews() {
     	return newsList;
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+    	propertyHandling.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l) {
+    	propertyHandling.removePropertyChangeListener(l);
     }
 }

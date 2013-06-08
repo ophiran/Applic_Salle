@@ -136,6 +136,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
 	            if(item.getType().equals(Categories.People))
 	                listeNewsPeople.addElement(item);
         	}
+        	else
+        		listeNewsATraiter.addElement(item);
         }
     }
     @Override
