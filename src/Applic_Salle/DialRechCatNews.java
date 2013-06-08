@@ -7,7 +7,12 @@ package Applic_Salle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import libNews.DialInfoNews;
+import libNews.News;
 
 /**
  *
@@ -15,10 +20,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DialRechCatNews extends javax.swing.JDialog implements ActionListener {
 
+    private DefaultListModel listeSelec, listePol, listeSport, listeInter;
+    News[] arr;
+    java.awt.Frame parent;
     /**
      * Creates new form DialRechCatNews
      */
-    public DialRechCatNews(java.awt.Frame parent, boolean modal) {
+    public DialRechCatNews(java.awt.Frame parent, boolean modal, DefaultListModel listePol, DefaultListModel listeSport, DefaultListModel listeInter) {
         super(parent, modal);
         initComponents();
         radioGroup.add(pol_radio);
@@ -26,17 +34,56 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
         radioGroup.add(inter_radio);
         details_button.addActionListener(this);
         quitter_button.addActionListener(this);
-        
-        if(pol_radio.isSelected()){
-            table.setModel(new DefaultTableModel(
-        }
+        sort_button.addActionListener(this);
+        this.listePol = listePol;
+        this.listeSport = listeSport;
+        this.listeInter = listeInter;
+        this.parent = parent;
         
         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(e.getSource().equals(quitter_button)){
+            this.dispose();
+        }
+        if(e.getSource().equals(sort_button)){
+            listeSelec = listePol;
+            if(pol_radio.isSelected()){
+                listeSelec = listePol;
+            }
+            if(sport_radio.isSelected()){
+                listeSelec = listeSport;
+            }
+            if(inter_radio.isSelected()){
+                listeSelec = listeInter;
+            }
+            arr = new News[listeSelec.getSize()];
+            listeSelec.copyInto(arr);
+            Object[][] data = new Object[arr.length][4];
+            for(int i = 0 ; i < arr.length ; i++){
+                data[i][0] = arr[i].getContenu().toString();
+                data[i][1] = arr[i].getType().toString();
+                if(arr[i].getImportance() == true)
+                    data[i][2] = "OUI";
+                else
+                    data[i][2] = "NON";
+                data[i][3] = arr[i].getAuteur().getLogin().toString();
+            }
+            String[] colNames = { "News", "Type", "Important", "Auteur"};
+            DefaultTableModel model = new DefaultTableModel(data, colNames);
+            table.setModel(model);
+        }
+        if(e.getSource().equals(details_button)){
+            try{
+                DialInfoNews dial = new DialInfoNews(parent, rootPaneCheckingEnabled, arr[table.getSelectedRow()]);
+                dial.setVisible(true);
+            }
+            catch(NullPointerException npe){
+                
+            }
+        }
     }
         
     /**
@@ -56,6 +103,7 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
         pol_radio = new javax.swing.JRadioButton();
         sport_radio = new javax.swing.JRadioButton();
         inter_radio = new javax.swing.JRadioButton();
+        sort_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,6 +130,8 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
 
         inter_radio.setText("International");
 
+        sort_button.setText("Trier");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,10 +142,11 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(details_button)
-                            .addComponent(quitter_button))
-                        .addGap(26, 26, 26))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(quitter_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(details_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sort_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,22 +158,24 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(details_button)
-                        .addGap(18, 18, 18)
                         .addComponent(quitter_button)
                         .addGap(26, 26, 26)
+                        .addComponent(details_button)
+                        .addGap(18, 18, 18)
+                        .addComponent(sort_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pol_radio)
                         .addGap(18, 18, 18)
                         .addComponent(sport_radio)
-                        .addGap(26, 26, 26)
-                        .addComponent(inter_radio)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(inter_radio)
+                        .addGap(35, 35, 35))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -136,6 +189,7 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
     private javax.swing.JRadioButton pol_radio;
     private javax.swing.JButton quitter_button;
     private javax.swing.ButtonGroup radioGroup;
+    private javax.swing.JButton sort_button;
     private javax.swing.JRadioButton sport_radio;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

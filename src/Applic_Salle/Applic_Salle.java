@@ -327,6 +327,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 DialListeJournalistes d = new DialListeJournalistes(this, rootPaneCheckingEnabled, mappingJournaliste.JournalisteListe);
                 d.setVisible(true);
             }
+            
+            if(e.getSource().equals(cat_item)){
+                DialRechCatNews dial = new DialRechCatNews(this, rootPaneCheckingEnabled, listeNewsPolitique, listeNewsSport, listeNewsInter);
+                dial.setVisible(true);
+                
+            }
         }
     }
 
