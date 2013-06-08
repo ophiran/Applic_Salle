@@ -40,6 +40,10 @@ public class News implements Serializable{
     public String getCommentaires(){
         return commentaires;
     }
+    
+    public boolean isValid() {
+    	return valid;
+    }
         
     public void setContenu(String s){
         contenu = s;

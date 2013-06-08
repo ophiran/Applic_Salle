@@ -125,8 +125,18 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         listeNews.setPath(propriete.getProperty("NewsFile"));
         mailinglistStoreNews.add(listeNews);
         
-        
-        
+        for(News item : listeNews.getNews()) {
+        	if(item.isValid()) {
+	        	if(item.getType().equals(Categories.Internationale))
+	                listeNewsInter.addElement(item);
+	            if(item.getType().equals(Categories.Politique))
+	                listeNewsPolitique.addElement(item);
+	            if(item.getType().equals(Categories.Sport))
+	                listeNewsSport.addElement(item);
+	            if(item.getType().equals(Categories.People))
+	                listeNewsPeople.addElement(item);
+        	}
+        }
     }
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
@@ -165,9 +175,11 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(login_item)) {
             new DialLogin(this,rootPaneCheckingEnabled,mappingJournaliste).setVisible(true);
-            if (journalisteConnecte != null){
+            if (journalisteConnecte != null) {
                 labelJournaliste.setText(journalisteConnecte.getLogin());
                 date_label.setText(journalisteConnecte.getFormat().format(date));
+                
+                
             }
         }
         if(e.getSource().equals(about_item)){
@@ -192,6 +204,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 dialTrait.setVisible(true);
                 if (dialTrait.isValidate)
                 {
+                	previousNews.setValidation(true);
                     if(dialTrait.newsEdited.getType().equals(Categories.Internationale))
                         listeNewsInter.addElement(dialTrait.newsEdited);
                     if(dialTrait.newsEdited.getType().equals(Categories.Politique))
@@ -262,6 +275,11 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                         if(dialTrait.newsEdited.getType().equals(Categories.People))
                             listeNewsPeople.addElement(dialTrait.newsEdited);
 
+                        for(StoreNewsListener item : mailinglistStoreNews) {
+                        	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,false));
+                        	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,true));
+                        }
+                        
                         if(type.equals(Categories.Internationale))
                             listeNewsInter.removeElementAt(indexNews);
                         if(type.equals(Categories.Politique))

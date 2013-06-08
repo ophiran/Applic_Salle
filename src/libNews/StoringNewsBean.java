@@ -6,8 +6,10 @@ package libNews;
 
 
 import java.beans.PropertyChangeSupport;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
@@ -39,6 +41,8 @@ public class StoringNewsBean implements StoreNewsListener{
     
     public void setPath(String path) {
     	this.path = path;
+    	if(path != null)
+    		readNews();
     }
     
     public void writeNews() {
@@ -55,8 +59,25 @@ public class StoringNewsBean implements StoreNewsListener{
     	}
     }
     
+    
     public void readNews() {
-    	
+    	if(path != null) {
+    		try {
+    			FileInputStream fis = new FileInputStream(path);
+    			ObjectInputStream stream = new ObjectInputStream(fis);
+    			newsList = (Vector<News>) stream.readObject();
+    			stream.close();
+    		}
+    		catch (IOException e){
+    			
+    		}
+    		catch (ClassNotFoundException e){
+    			
+    		}
+    	}
     }
     
+    public Vector<News> getNews() {
+    	return newsList;
+    }
 }
