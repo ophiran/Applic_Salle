@@ -72,6 +72,7 @@ public class StoringNewsBean implements StoreNewsListener{
     			ObjectInputStream stream = new ObjectInputStream(fis);
     			newsList = (Vector<News>) stream.readObject();
     			stream.close();
+    			propertyHandling.firePropertyChange("ChargeNews", null, newsList.size());
     		}
     		catch (IOException e){
     			

@@ -43,7 +43,13 @@ public class NewsCounterBean implements PropertyChangeListener{
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        setNewsNumber((int)evt.getNewValue());
+    	System.out.println(evt.getPropertyName());
+    	if(evt.getPropertyName().equals("ChargeNews"))
+    		setNewsNumber((int)evt.getNewValue());
+    	else if(evt.getPropertyName().equals("AjoutNews"))
+    		setNewsNumber(getNewsNumber() + 1);
+    	else if(evt.getPropertyName().equals("SupNews"))
+    		setNewsNumber(getNewsNumber() - 1);
     }
     
     
