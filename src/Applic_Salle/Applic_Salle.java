@@ -44,6 +44,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     private Vector<StoreNewsListener> mailinglistStoreNews = new Vector<>();
     private StoringNewsBean listeNews = new StoringNewsBean();
     private NewsCounterBean newsCounter;
+    private FichierLog log = new FichierLog();
     
     public Applic_Salle() {
         initComponents();
@@ -114,6 +115,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         aRecept_item.addActionListener(this);
         nouveau_item.addActionListener(this);
         liste_item.addActionListener(this);
+        log_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -127,10 +129,14 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         newsCounter = new NewsCounterBean(NewsCounterLabel);
         listeNews.addPropertyChangeListener(newsCounter);
         
+        log.setLogPath(propriete.getProperty("LogFile"));
+        
         listeNews.setPath(propriete.getProperty("NewsFile"));
         mailinglistStoreNews.add(listeNews);
         
+        log.addLine("Loading News");
         for(News item : listeNews.getNews()) {
+        	log.addLine("Adding News: " + item.toString() + " - " + item.isValid());
         	if(item.isValid()) {
 	        	if(item.getType().equals(Categories.Internationale))
 	                listeNewsInter.addElement(item);
@@ -144,10 +150,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         	else
         		listeNewsATraiter.addElement(item);
         }
+        log.addLine("Finished loading News");
     }
+    
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
         System.out.println("A news has been received");
+        log.addLine("A news has been received");
         JOptionPane.showMessageDialog(this, "A news has been received", "News received", JOptionPane.INFORMATION_MESSAGE);
         String news[] = e.getNews().split("~");
         String contenu = news[0];
@@ -201,6 +210,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             if(e.getSource().equals(ajouter_button)){
             	News tmpNews = new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, "");
                 listeNewsATraiter.addElement(tmpNews);
+                log.addLine("Adding News for validation");
                 for(StoreNewsListener item : mailinglistStoreNews) {
                 	item.StoreNewsDetected(new StoreNewsEvent(this, tmpNews,true));
                 }
@@ -226,10 +236,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                     	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,true));
                     }
                     listeNewsATraiter.removeElement(previousNews);
+                    log.addLine("A News has been validated");
                 }
             }
             if(e.getSource().equals(sup_button)){
             	
+            	log.addLine("A news has been removed");
             	for(StoreNewsListener item : mailinglistStoreNews) {
                 	item.StoreNewsDetected(new StoreNewsEvent(this, (News)news_comboBox.getSelectedItem() ,false));
                 }
@@ -293,6 +305,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                             listeNewsPolitique.removeElementAt(indexNews);
                         if(type.equals(Categories.Sport))
                             listeNewsSport.removeElementAt(indexNews);
+                        log.addLine("A News has been edited");
 
                     }
                 }
@@ -319,12 +332,18 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 if(dialJourn.isValidated){
                     mappingJournaliste.AddJournaliste(dialJourn.newJournaliste);
                     mappingJournaliste.Serialize();
+                    log.addLine("A new journalist has been added");
                 }
             }
             
             if(e.getSource().equals(liste_item)){
                 DialListeJournalistes d = new DialListeJournalistes(this, rootPaneCheckingEnabled, mappingJournaliste.JournalisteListe);
                 d.setVisible(true);
+            }
+            
+            if(e.getSource().equals(log_item)) {
+            	DialLog d = new DialLog(this, rootPaneCheckingEnabled, propriete.getProperty("LogFile"));
+            	d.setVisible(true);
             }
         }
     }
