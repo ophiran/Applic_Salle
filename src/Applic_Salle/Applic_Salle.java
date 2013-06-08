@@ -5,6 +5,7 @@
 package Applic_Salle;
 
 import libNews.DialTraitement;
+import libNews.NewsCounterBean;
 import constantes.Categories;
 import libNews.*;
 import java.awt.event.*;
@@ -42,6 +43,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     
     private Vector<StoreNewsListener> mailinglistStoreNews = new Vector<>();
     private StoringNewsBean listeNews = new StoringNewsBean();
+    private NewsCounterBean newsCounter;
     
     public Applic_Salle() {
         initComponents();
@@ -122,6 +124,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         listSport.setModel(listeNewsSport);
         
         news_comboBox.setModel(listeNewsATraiter);
+        
+        newsCounter = new NewsCounterBean(NewsCounterLabel);
+        listeNews.addPropertyChangeListener(newsCounter);
         
         listeNews.setPath(propriete.getProperty("NewsFile"));
         mailinglistStoreNews.add(listeNews);
@@ -357,6 +362,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         listSport = new javax.swing.JList();
         edit_button = new javax.swing.JButton();
         labelJournaliste = new javax.swing.JLabel();
+        NewsCounterLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         util_menu = new javax.swing.JMenu();
         login_item = new javax.swing.JMenuItem();
@@ -429,6 +435,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         jScrollPane3.setViewportView(listSport);
 
         edit_button.setText("Editer");
+
+        NewsCounterLabel.setText("jLabel5");
 
         util_menu.setText("Utilisateurs");
 
@@ -550,12 +558,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(271, 271, 271)
+                        .addComponent(edit_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(NewsCounterLabel)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(271, 271, 271)
-                .addComponent(edit_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,7 +599,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(edit_button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edit_button)
+                    .addComponent(NewsCounterLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -632,6 +643,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel NewsCounterLabel;
     private javax.swing.JMenuItem aRecept_item;
     private javax.swing.JMenuItem about_item;
     private javax.swing.JTextField addNews_txtField;
