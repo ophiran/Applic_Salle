@@ -40,27 +40,27 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     protected Vector<ThreadNews> poolThreads = new Vector<ThreadNews>();
     protected ListeNewsBean detectNewNews = new ListeNewsBean();
     private Properties propriete;
+    private Properties portProp;
     
     private Vector<StoreNewsListener> mailinglistStoreNews = new Vector<>();
     private StoringNewsBean listeNews = new StoringNewsBean();
     private NewsCounterBean newsCounter;
+    private FichierLog log = new FichierLog();
     
     public Applic_Salle() {
         initComponents();
         propriete = new Properties();
-        try
-        {
+        portProp = new Properties();
+        
+        //Chargement des Configurations
+        try {
             FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
                             + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
             propriete.load(file);
             file.close();
-        	
-        }
-        catch(FileNotFoundException e)
-        {
+        } catch(FileNotFoundException e) {
             try {
-                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                        + "ApplicSalle");
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle");
                 tmpFile.mkdirs();
 
                 FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
@@ -69,7 +69,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 propriete.put("propertiesName", "");
                 propriete.put("SerializationName", "journalistes");
                 propriete.put("RefNumbers", "");
-                propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+                propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator")
                                 + "ApplicSalle" + System.getProperty("file.separator") + "ApplicLog.log");
                 propriete.put("NewsFile",System.getProperty("user.home") + System.getProperty("file.separator") 
                                 + "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
@@ -78,19 +78,47 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             } catch (IOException e1) {
                     e1.printStackTrace();
             }
-        }
-        catch(IOException e)
-        {
+        } catch(IOException e) {
             e.printStackTrace();
         }
         
-        mappingJournaliste.SetPath(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                + "ApplicSalle" + System.getProperty("file.separator") + propriete.getProperty("SerializationName"));
+        //Chargement des ports
+        try {
+            FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+                            + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+            portProp.load(file);
+            file.close();
+        } catch(FileNotFoundException e) {
+            try {
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle");
+                tmpFile.mkdirs();
+
+                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+                portProp.put("Liege", "25678");
+                portProp.put("Singapour", "25679");
+                portProp.put("Montreal", "25680");
+                portProp.put("Paris", "25681");
+                portProp.put("New-York", "25682");
+                portProp.put("Istanbul", "25683");
+                portProp.put("Tokyo", "25684");
+                portProp.store(file, "");
+
+            } catch (IOException e1) {
+                    e1.printStackTrace();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        mappingJournaliste.SetPath(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle" 
+        							+ System.getProperty("file.separator") + propriete.getProperty("SerializationName"));
         mappingJournaliste.Deserialize();
         
-        for(int i = 0 ; i < 5 ; i++){
-            poolThreads.add(new ThreadNews(1000, 25678+i));
+        for(Object item : portProp.values()) {
+        	poolThreads.add(new ThreadNews(1000, Integer.parseInt((String)item)));
         }
+        
         for(ThreadNews t:poolThreads){
             t.start();
         }
@@ -128,10 +156,14 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         newsCounter = new NewsCounterBean(NewsCounterLabel);
         listeNews.addPropertyChangeListener(newsCounter);
         
+        log.setLogPath(propriete.getProperty("LogFile"));
+        
         listeNews.setPath(propriete.getProperty("NewsFile"));
         mailinglistStoreNews.add(listeNews);
         
+        log.addLine("Loading News");
         for(News item : listeNews.getNews()) {
+        	log.addLine("Adding News: " + item.toString() + " - " + item.isValid());
         	if(item.isValid()) {
 	        	if(item.getType().equals(Categories.Internationale))
 	                listeNewsInter.addElement(item);
@@ -145,10 +177,13 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         	else
         		listeNewsATraiter.addElement(item);
         }
+        log.addLine("Finished loading News");
     }
+    
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
         System.out.println("A news has been received");
+        log.addLine("A news has been received");
         JOptionPane.showMessageDialog(this, "A news has been received", "News received", JOptionPane.INFORMATION_MESSAGE);
         String news[] = e.getNews().split("~");
         String contenu = news[0];
@@ -202,6 +237,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             if(e.getSource().equals(ajouter_button)){
             	News tmpNews = new News(addNews_txtField.getText(), journalisteConnecte, false, Categories.Internationale, "");
                 listeNewsATraiter.addElement(tmpNews);
+                log.addLine("Adding News for validation");
                 for(StoreNewsListener item : mailinglistStoreNews) {
                 	item.StoreNewsDetected(new StoreNewsEvent(this, tmpNews,true));
                 }
@@ -227,10 +263,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                     	item.StoreNewsDetected(new StoreNewsEvent(this, previousNews,true));
                     }
                     listeNewsATraiter.removeElement(previousNews);
+                    log.addLine("A News has been validated");
                 }
             }
             if(e.getSource().equals(sup_button)){
             	
+            	log.addLine("A news has been removed");
             	for(StoreNewsListener item : mailinglistStoreNews) {
                 	item.StoreNewsDetected(new StoreNewsEvent(this, (News)news_comboBox.getSelectedItem() ,false));
                 }
@@ -294,6 +332,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                             listeNewsPolitique.removeElementAt(indexNews);
                         if(type.equals(Categories.Sport))
                             listeNewsSport.removeElementAt(indexNews);
+                        log.addLine("A News has been edited");
 
                     }
                 }
@@ -320,6 +359,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 if(dialJourn.isValidated){
                     mappingJournaliste.AddJournaliste(dialJourn.newJournaliste);
                     mappingJournaliste.Serialize();
+                    log.addLine("A new journalist has been added");
                 }
             }
             
