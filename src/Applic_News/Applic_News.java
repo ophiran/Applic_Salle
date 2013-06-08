@@ -28,6 +28,7 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
     private NetworkStringSender networkSender;
     private int PortEmission = 25678;
     private Properties propriete;
+    private Properties portProp;
     private ThreadRandomGenerator threadRandomGen; 
     private FichierLog log;
     /**
@@ -35,20 +36,17 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
      */
     public Applic_News() {
         initComponents();
-        
         propriete = new Properties();
-        try
-        {
+        portProp = new Properties();
+        
+        try {
         	FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
         			+ "ApplicNews" + System.getProperty("file.separator") + "PropertiesNews.properties");
         	propriete.load(file);
         	file.close();
-        	
-        }
-        catch(FileNotFoundException e)
-        {
+        } catch(FileNotFoundException e) {
         	try {
-        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
+        		File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator")
 						+ "ApplicNews");
         		tmpFile.mkdirs();
         		
@@ -58,26 +56,48 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
 				propriete.put("propertiesName", "");
 				propriete.put("SerializationName", "");
 				propriete.put("RefNumber", "17");
-				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+				propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator")
 						+ "ApplicNews" + System.getProperty("file.separator") +  "ApplicLog.log");
-                                propriete.put("Town", "");
-                                propriete.put("Liege", "25678");
-                                propriete.put("Amsterdam", "25679");
-                                propriete.put("London", "25680");
-                                propriete.put("Montreal", "25681");
-                                propriete.put("New-York", "25682");
-                                propriete.put("Istanbul", "25683");
+                propriete.put("Town", "Liege");
 				propriete.store(file, "");
 				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-        }
-        catch(IOException e)
-        {
-        	
+        } catch(IOException e) {
         	e.printStackTrace();
         }
+        
+        try {
+            FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+                            + "ApplicNews" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+            portProp.load(file);
+            file.close();
+        } catch(FileNotFoundException e) {
+            try {
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicNews");
+                tmpFile.mkdirs();
+
+                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicNews" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+
+                portProp.put("Liege", "25678");
+                portProp.put("Singapour", "25679");
+                portProp.put("Montreal", "25680");
+                portProp.put("Paris", "25681");
+                portProp.put("New-York", "25682");
+                portProp.put("Istanbul", "25683");
+                portProp.put("Tokyo", "25684");
+                portProp.store(file, "");
+
+            } catch (IOException e1) {
+                    e1.printStackTrace();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        PortEmission = Integer.parseInt(portProp.getProperty(propriete.getProperty("Town")));
         
         ThreadRandomGenerator threadRandomGen = new ThreadRandomGenerator(this , 0, 50, Integer.parseInt(propriete.getProperty("RefNumber")), 4);
         threadRandomGen.start();

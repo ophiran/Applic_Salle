@@ -40,6 +40,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     protected Vector<ThreadNews> poolThreads = new Vector<ThreadNews>();
     protected ListeNewsBean detectNewNews = new ListeNewsBean();
     private Properties propriete;
+    private Properties portProp;
     
     private Vector<StoreNewsListener> mailinglistStoreNews = new Vector<>();
     private StoringNewsBean listeNews = new StoringNewsBean();
@@ -49,19 +50,17 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     public Applic_Salle() {
         initComponents();
         propriete = new Properties();
-        try
-        {
+        portProp = new Properties();
+        
+        //Chargement des Configurations
+        try {
             FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
                             + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesSalle.properties");
             propriete.load(file);
             file.close();
-        	
-        }
-        catch(FileNotFoundException e)
-        {
+        } catch(FileNotFoundException e) {
             try {
-                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                        + "ApplicSalle");
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle");
                 tmpFile.mkdirs();
 
                 FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
@@ -70,7 +69,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 propriete.put("propertiesName", "");
                 propriete.put("SerializationName", "journalistes");
                 propriete.put("RefNumbers", "");
-                propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator") 
+                propriete.put("LogFile",System.getProperty("user.home") + System.getProperty("file.separator")
                                 + "ApplicSalle" + System.getProperty("file.separator") + "ApplicLog.log");
                 propriete.put("NewsFile",System.getProperty("user.home") + System.getProperty("file.separator") 
                                 + "ApplicSalle" + System.getProperty("file.separator") + "News.dat");
@@ -79,19 +78,47 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             } catch (IOException e1) {
                     e1.printStackTrace();
             }
-        }
-        catch(IOException e)
-        {
+        } catch(IOException e) {
             e.printStackTrace();
         }
         
-        mappingJournaliste.SetPath(System.getProperty("user.home") + System.getProperty("file.separator") 
-                                + "ApplicSalle" + System.getProperty("file.separator") + propriete.getProperty("SerializationName"));
+        //Chargement des ports
+        try {
+            FileReader file = new FileReader(System.getProperty("user.home") + System.getProperty("file.separator") 
+                            + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+            portProp.load(file);
+            file.close();
+        } catch(FileNotFoundException e) {
+            try {
+                File tmpFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle");
+                tmpFile.mkdirs();
+
+                FileWriter file = new FileWriter(System.getProperty("user.home") + System.getProperty("file.separator") 
+                                + "ApplicSalle" + System.getProperty("file.separator") + "PropertiesLoc.properties");
+                portProp.put("Liege", "25678");
+                portProp.put("Singapour", "25679");
+                portProp.put("Montreal", "25680");
+                portProp.put("Paris", "25681");
+                portProp.put("New-York", "25682");
+                portProp.put("Istanbul", "25683");
+                portProp.put("Tokyo", "25684");
+                portProp.store(file, "");
+
+            } catch (IOException e1) {
+                    e1.printStackTrace();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        mappingJournaliste.SetPath(System.getProperty("user.home") + System.getProperty("file.separator") + "ApplicSalle" 
+        							+ System.getProperty("file.separator") + propriete.getProperty("SerializationName"));
         mappingJournaliste.Deserialize();
         
-        for(int i = 0 ; i < 5 ; i++){
-            poolThreads.add(new ThreadNews(1000, 25678+i));
+        for(Object item : portProp.values()) {
+        	poolThreads.add(new ThreadNews(1000, Integer.parseInt((String)item)));
         }
+        
         for(ThreadNews t:poolThreads){
             t.start();
         }
