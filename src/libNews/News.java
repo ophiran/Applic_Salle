@@ -6,6 +6,7 @@ package libNews;
 import Applic_Salle.Journaliste;
 import constantes.Categories;
 import java.io.*;
+import java.util.Vector;
 /**
  *
  * @author ekimd_000
@@ -36,6 +37,16 @@ public class News implements Serializable{
     }
     public String getMotsCles(){
         return motsCles;
+    }
+    public String[] getListeMotsCles(){
+        return this.getMotsCles().split("-|/");
+    }
+    public boolean containsMotCle(String keyword){
+        for(String s : this.getListeMotsCles()){
+            if(s.equals(keyword))
+                return true;
+        }
+        return false;
     }
     public String getCommentaires(){
         return commentaires;

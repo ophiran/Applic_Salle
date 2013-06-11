@@ -143,6 +143,8 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         nouveau_item.addActionListener(this);
         liste_item.addActionListener(this);
         cat_item.addActionListener(this);
+        cle_item.addActionListener(this);
+        nPeople_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -373,6 +375,15 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 dial.setVisible(true);
                 
             }
+            if(e.getSource().equals(cle_item)){
+                DialRechCleNews dial = new DialRechCleNews(this, rootPaneCheckingEnabled, listeNewsPolitique, listeNewsSport, listeNewsInter);
+                dial.setVisible(true);
+            }
+            if(e.getSource().equals(nPeople_item)){
+                DialRechPeopleNews dial = new DialRechPeopleNews(this, rootPaneCheckingEnabled, listeNewsPeople);
+                dial.setVisible(true);
+            }
+            
         }
     }
 

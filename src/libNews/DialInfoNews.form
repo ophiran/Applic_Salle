@@ -41,7 +41,7 @@
                           <Component id="auteur_texte" alignment="0" max="32767" attributes="0"/>
                           <Component id="type_texte" alignment="0" max="32767" attributes="0"/>
                           <Component id="importance_texte" alignment="0" max="32767" attributes="0"/>
-                          <Component id="motclef_texte" alignment="0" pref="143" max="32767" attributes="0"/>
+                          <Component id="motclef_texte" alignment="0" pref="150" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                   </Group>
@@ -86,7 +86,7 @@
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="commentaire_texte" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="104" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

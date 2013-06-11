@@ -6,6 +6,9 @@ package Applic_Salle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -35,6 +38,13 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
         details_button.addActionListener(this);
         quitter_button.addActionListener(this);
         sort_button.addActionListener(this);
+        table.addMouseListener(new MouseAdapter(){
+                                    @Override
+                                    public void mouseClicked(MouseEvent e)
+                                    {   
+                                        getDetails(e);
+                                    }
+                                });
         this.listePol = listePol;
         this.listeSport = listeSport;
         this.listeInter = listeInter;
@@ -83,6 +93,16 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
             catch(NullPointerException npe){
                 
             }
+        }
+    }
+    
+    public void getDetails(MouseEvent e) {
+        try{
+            DialInfoNews dial = new DialInfoNews(parent, rootPaneCheckingEnabled, arr[table.rowAtPoint(e.getPoint())]);
+            dial.setVisible(true);
+        }
+        catch(NullPointerException npe){
+
         }
     }
         
@@ -193,5 +213,8 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
     private javax.swing.JRadioButton sport_radio;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
+
+
+
 
 }
