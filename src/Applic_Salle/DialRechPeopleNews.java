@@ -26,7 +26,6 @@ import libNews.News;
 public class DialRechPeopleNews extends javax.swing.JDialog implements ActionListener {
 
     private Vector<News> listeNewsPeople, listeTriee;
-    News[] arr;
     java.awt.Frame parent;
     /**
      * Creates new form DialRechCatNews
