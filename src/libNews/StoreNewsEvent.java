@@ -15,12 +15,22 @@ public class StoreNewsEvent extends EventObject{
 	private News news;
 	private Boolean operation;
 	
+    /**
+     *
+     * @param o
+     * @param news
+     * @param operation
+     */
     public StoreNewsEvent(Object o,News news,Boolean operation){
         super(o);
         this.news = news;
         this.operation = operation;
     }
     
+    /**
+     *
+     * @return
+     */
     public News getNews(){
     	return news;
     }

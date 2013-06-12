@@ -14,6 +14,12 @@ import javax.swing.DefaultListModel;
 public class DialListeJournalistes extends javax.swing.JDialog {
 
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param JournalisteListe
+     */
     public DialListeJournalistes(java.awt.Frame parent, boolean modal, HashMap<String,Journaliste> JournalisteListe) {
         super(parent, modal);
         initComponents();

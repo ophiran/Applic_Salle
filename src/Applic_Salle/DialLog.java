@@ -18,6 +18,9 @@ public class DialLog extends javax.swing.JDialog implements ActionListener {
 	private FichierLog log = new FichierLog();
     /**
      * Creates new form DialLog
+     * @param parent 
+     * @param path
+     * @param modal  
      */
     public DialLog(java.awt.Frame parent, boolean modal, String path) {
         super(parent, modal);

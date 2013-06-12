@@ -19,6 +19,9 @@ public class DialLogin extends javax.swing.JDialog {
     private ImplVerificateur userVerif;
     /**
      * Creates new form DialogLogin
+     * @param parent 
+     * @param modal 
+     * @param userVerif 
      */
     public DialLogin(java.awt.Frame parent, boolean modal,ImplVerificateur userVerif) {
         super(parent, modal);
@@ -38,11 +41,19 @@ public class DialLogin extends javax.swing.JDialog {
         });
     }
 
+    /**
+     *
+     * @param evt
+     */
     public void MouseClickedAnnuler(MouseEvent evt)
     {
         this.dispose();
     }
     
+    /**
+     *
+     * @param evt
+     */
     public void MouseClickedValider(MouseEvent evt)
     {
         

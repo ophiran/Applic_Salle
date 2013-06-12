@@ -7,6 +7,14 @@ public class ThreadRandomGenerator extends java.lang.Thread
     private UtilisateurNombre utilisateurThread;
     private int borneInferieure, borneSuperieure, multipleDeclenchement, tempsPause;
     private int nombreProduit;
+    /**
+     *
+     * @param un
+     * @param bi
+     * @param bs
+     * @param md
+     * @param tp
+     */
     public ThreadRandomGenerator(UtilisateurNombre un, int bi, int bs, int md, int tp)
     {
         utilisateurThread = un; borneInferieure=bi; borneSuperieure=bs;

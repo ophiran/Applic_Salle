@@ -11,8 +11,15 @@ import java.util.Locale;
  * @author Ophiran
  */
 public class LocaleCustom {
+    /**
+     *
+     */
     public Locale locale;
     
+    /**
+     *
+     * @param locale
+     */
     public LocaleCustom(Locale locale){
         this.locale = locale;
     }

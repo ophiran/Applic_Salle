@@ -31,13 +31,37 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
      */
     public static Journaliste journalisteConnecte;
     ImplVerificateur mappingJournaliste = new ImplVerificateur();
+    /**
+     *
+     */
     public DefaultComboBoxModel listeNewsATraiter = new DefaultComboBoxModel();
+    /**
+     *
+     */
     public DefaultListModel listeNewsInter = new DefaultListModel();
+    /**
+     *
+     */
     public DefaultListModel listeNewsSport = new DefaultListModel();
+    /**
+     *
+     */
     public DefaultListModel listeNewsPolitique = new DefaultListModel();
+    /**
+     *
+     */
     public Vector<News> listeNewsPeople = new Vector<News>();
+    /**
+     *
+     */
     public Date date = new Date();
+    /**
+     *
+     */
     protected Vector<ThreadNews> poolThreads = new Vector<ThreadNews>();
+    /**
+     *
+     */
     protected ListeNewsBean detectNewNews = new ListeNewsBean();
     private Properties propriete;
     private Properties portProp;
@@ -47,6 +71,9 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
     private NewsCounterBean newsCounter;
     private FichierLog log = new FichierLog();
     
+    /**
+     *
+     */
     public Applic_Salle() {
         initComponents();
         propriete = new Properties();
@@ -182,6 +209,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         log.addLine("Finished loading News");
     }
     
+    /**
+     *
+     * @param e
+     */
     @Override
     public void notifyNewsDetected(NotifyNewsEvent e){
         System.out.println("A news has been received");

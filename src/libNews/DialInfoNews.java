@@ -12,6 +12,9 @@ public class DialInfoNews extends javax.swing.JDialog {
 
     /**
      * Creates new form DialInfoNews
+     * @param parent 
+     * @param modal
+     * @param news  
      */
     public DialInfoNews(java.awt.Frame parent, boolean modal, News news) {
         super(parent, modal);

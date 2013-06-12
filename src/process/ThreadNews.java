@@ -13,13 +13,36 @@ import java.util.*;
  * @author ekym
  */
 public class ThreadNews extends Thread{
+    /**
+     *
+     */
     protected NetworkStringReceiver receiver;
+    /**
+     *
+     */
     protected int listeningPort;
+    /**
+     *
+     */
     protected int sleepTime;
+    /**
+     *
+     */
     static protected Vector<NewsListener> mailingList;
+    /**
+     *
+     */
     public Boolean mustWait = true;
+    /**
+     *
+     */
     public Boolean finished = false;
     
+    /**
+     *
+     * @param sleepTime
+     * @param port
+     */
     public ThreadNews(int sleepTime, int port){
         listeningPort = port;
         receiver = new NetworkStringReceiver(listeningPort);
@@ -57,6 +80,10 @@ public class ThreadNews extends Thread{
 
     }
     
+    /**
+     *
+     * @param n
+     */
     public static void AddNewsListener(NewsListener n){
         mailingList.add(n);
     }

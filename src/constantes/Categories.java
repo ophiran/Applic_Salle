@@ -9,8 +9,20 @@ package constantes;
  * @author ekimd_000
  */
 public class Categories {
+    /**
+     *
+     */
     public static final String Politique = "Politique";
+    /**
+     *
+     */
     public static final String Sport = "Sport";
+    /**
+     *
+     */
     public static final String Internationale = "Internationale";
+    /**
+     *
+     */
     public static final String People = "People";
 }

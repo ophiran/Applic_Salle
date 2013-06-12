@@ -25,6 +25,11 @@ public class DialRechCleNews extends javax.swing.JDialog implements ActionListen
     
     /**
      * Creates new form DialRechClefNews
+     * @param parent 
+     * @param modal 
+     * @param listeSport
+     * @param listePol 
+     * @param listeInter  
      */
     public DialRechCleNews(java.awt.Frame parent, boolean modal, DefaultListModel listePol, DefaultListModel listeSport, DefaultListModel listeInter) {
         super(parent, modal);

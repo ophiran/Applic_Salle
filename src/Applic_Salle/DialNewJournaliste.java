@@ -13,9 +13,20 @@ import java.awt.event.ActionListener;
  */
 public class DialNewJournaliste extends javax.swing.JDialog implements ActionListener {
 
+    /**
+     *
+     */
     public Journaliste newJournaliste;
+    /**
+     *
+     */
     public boolean isValidated;
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public DialNewJournaliste(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

@@ -21,6 +21,9 @@ public class DialDate extends javax.swing.JDialog implements ActionListener{
     
     /**
      * Creates new form DialDate
+     * @param parent 
+     * @param modal
+     * @param journaliste  
      */
     public DialDate(java.awt.Frame parent, boolean modal,Journaliste journaliste) {
         super(parent, modal);

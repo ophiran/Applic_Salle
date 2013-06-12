@@ -11,5 +11,9 @@ import java.util.EventListener;
  * @author Ophiran
  */
 public interface NewsListener extends EventListener{
+    /**
+     *
+     * @param e
+     */
     public void newsDetected(NewsEvent e);
 }

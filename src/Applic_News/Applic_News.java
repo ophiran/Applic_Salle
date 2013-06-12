@@ -200,10 +200,18 @@ public class Applic_News extends javax.swing.JFrame implements ActionListener, U
                 
     }
     
+    /**
+     *
+     * @return
+     */
     public String getIdentifiant(){
         return propriete.getProperty("Town");
     }
     
+    /**
+     *
+     * @param n
+     */
     public void traiteNombre(int n){
         JOptionPane.showMessageDialog(this, "Alarme: Veuillez fermer l'application", "Probleme sur une ligne",
             JOptionPane.WARNING_MESSAGE,null);

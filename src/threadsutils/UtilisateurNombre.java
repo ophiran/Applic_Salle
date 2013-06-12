@@ -9,7 +9,15 @@ package threadsutils;
  * @author ekym
  */
 public interface UtilisateurNombre {
+    /**
+     *
+     * @return
+     */
     String getIdentifiant();
+    /**
+     *
+     * @param n
+     */
     void traiteNombre(int n);
     
 }

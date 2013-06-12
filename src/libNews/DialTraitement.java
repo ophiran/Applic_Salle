@@ -21,8 +21,18 @@ public class DialTraitement extends javax.swing.JDialog implements ActionListene
      * Creates new form DialTraitement
      */
     public News newsEdited;
+    /**
+     *
+     */
     public boolean isValidate;
     private Journaliste journalisteConnecte;
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param news
+     * @param auteur
+     */
     public DialTraitement(java.awt.Frame parent, boolean modal, News news, Journaliste auteur) {
         super(parent, modal);
         initComponents();

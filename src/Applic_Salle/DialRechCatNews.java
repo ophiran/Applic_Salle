@@ -28,6 +28,11 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
     java.awt.Frame parent;
     /**
      * Creates new form DialRechCatNews
+     * @param parent
+     * @param modal 
+     * @param listePol 
+     * @param listeSport 
+     * @param listeInter  
      */
     public DialRechCatNews(java.awt.Frame parent, boolean modal, DefaultListModel listePol, DefaultListModel listeSport, DefaultListModel listeInter) {
         super(parent, modal);
@@ -96,6 +101,10 @@ public class DialRechCatNews extends javax.swing.JDialog implements ActionListen
         }
     }
     
+    /**
+     *
+     * @param e
+     */
     public void getDetails(MouseEvent e) {
         try{
             DialInfoNews dial = new DialInfoNews(parent, rootPaneCheckingEnabled, arr[table.rowAtPoint(e.getPoint())]);

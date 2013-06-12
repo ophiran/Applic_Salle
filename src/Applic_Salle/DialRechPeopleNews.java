@@ -29,6 +29,9 @@ public class DialRechPeopleNews extends javax.swing.JDialog implements ActionLis
     java.awt.Frame parent;
     /**
      * Creates new form DialRechCatNews
+     * @param parent 
+     * @param modal
+     * @param listeNewsPeople  
      */
     public DialRechPeopleNews(java.awt.Frame parent, boolean modal, Vector<News> listeNewsPeople) {
         super(parent, modal);
@@ -92,6 +95,10 @@ public class DialRechPeopleNews extends javax.swing.JDialog implements ActionLis
         }
     }
     
+    /**
+     *
+     * @param e
+     */
     public void getDetails(MouseEvent e) {
         try{
             DialInfoNews dial = new DialInfoNews(parent, rootPaneCheckingEnabled, listeTriee.elementAt(table.rowAtPoint(e.getPoint())));

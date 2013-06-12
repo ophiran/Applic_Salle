@@ -23,19 +23,32 @@ import people.*;
  */
 public class ImplVerificateur extends Verificateur implements Serializable{
 
+    /**
+     *
+     */
     public HashMap<String,Journaliste> JournalisteListe = new HashMap();
     private String path;
     
+    /**
+     *
+     */
     public ImplVerificateur()
     {
         
     }
     
+    /**
+     *
+     * @param path
+     */
     public void SetPath(String path)
     {
        this.path = path; 
        
     }
+    /**
+     *
+     */
     public void Deserialize()
     {
         try
@@ -60,6 +73,9 @@ public class ImplVerificateur extends Verificateur implements Serializable{
             e.printStackTrace();
         }
     }
+    /**
+     *
+     */
     public void Serialize()
     {
         try{
@@ -74,16 +90,30 @@ public class ImplVerificateur extends Verificateur implements Serializable{
             e.printStackTrace();
         }
     }
+    /**
+     *
+     * @param journaliste
+     */
     public void AddJournaliste(Journaliste journaliste)
     {
         JournalisteListe.put(journaliste.getLogin(), journaliste);
     }
     
+    /**
+     *
+     * @param login
+     * @return
+     */
     public Journaliste getJournaliste(String login)
     {
         return JournalisteListe.get(login);
     }
     
+    /**
+     *
+     * @param login
+     * @return
+     */
     @Override
     public String findPassword(String login) {
         Journaliste temp = JournalisteListe.get(login);

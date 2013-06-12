@@ -13,10 +13,17 @@ import java.util.Vector;
 public class ListeNewsBean implements NewsListener {
     Vector<NotifyNewsListener> mailingList;
     
+    /**
+     *
+     */
     public ListeNewsBean(){
         mailingList = new Vector<NotifyNewsListener>();
     }
     
+    /**
+     *
+     * @param e
+     */
     @Override
     public void newsDetected(NewsEvent e) {
         for (NotifyNewsListener n: mailingList){
@@ -24,6 +31,10 @@ public class ListeNewsBean implements NewsListener {
         }
     }
     
+    /**
+     *
+     * @param n
+     */
     public void AddNotifyNewsListener(NotifyNewsListener n){
         mailingList.add(n);
     }

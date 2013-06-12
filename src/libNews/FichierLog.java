@@ -4,22 +4,37 @@ import java.io.*;
 
 import javax.swing.JTextArea;
 
+/**
+ *
+ * @author ekym
+ */
 public class FichierLog {
 
 	private JTextArea textArea;
 	private String path;
 	
-	public FichierLog() {
+	/**
+     *
+     */
+    public FichierLog() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setJTextArea(JTextArea textArea) {
+	/**
+     *
+     * @param textArea
+     */
+    public void setJTextArea(JTextArea textArea) {
 		this.textArea = textArea;
 		if(path != null)
 			readLog();
 	}
 	
-	public void setLogPath(String path){
+	/**
+     *
+     * @param path
+     */
+    public void setLogPath(String path){
 		this.path = path;
 		if(textArea != null)
 			readLog();
@@ -40,7 +55,11 @@ public class FichierLog {
 		
 	}
 	
-	public void addLine(String log) {
+	/**
+     *
+     * @param log
+     */
+    public void addLine(String log) {
 		if(textArea != null)
 		{
 			textArea.append(log + "\n");

@@ -24,13 +24,23 @@ public class StoringNewsBean implements StoreNewsListener{
 	
 	private String path;
     private Vector<News> newsList = new Vector<News>();
+    /**
+     *
+     */
     protected PropertyChangeSupport propertyHandling = new PropertyChangeSupport(this);
     
+    /**
+     *
+     */
     public StoringNewsBean() {
         
     }
     
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void StoreNewsDetected(StoreNewsEvent e) {
     	if(e.getOperation()){
@@ -44,12 +54,19 @@ public class StoringNewsBean implements StoreNewsListener{
     	writeNews();
     }
     
+    /**
+     *
+     * @param path
+     */
     public void setPath(String path) {
     	this.path = path;
     	if(path != null)
     		readNews();
     }
     
+    /**
+     *
+     */
     public void writeNews() {
     	if(path != null) {
 	    	try {
@@ -65,6 +82,9 @@ public class StoringNewsBean implements StoreNewsListener{
     }
     
     
+    /**
+     *
+     */
     public void readNews() {
     	if(path != null) {
     		try {
@@ -83,14 +103,26 @@ public class StoringNewsBean implements StoreNewsListener{
     	}
     }
     
+    /**
+     *
+     * @return
+     */
     public Vector<News> getNews() {
     	return newsList;
     }
     
+    /**
+     *
+     * @param l
+     */
     public void addPropertyChangeListener(PropertyChangeListener l) {
     	propertyHandling.addPropertyChangeListener(l);
     }
     
+    /**
+     *
+     * @param l
+     */
     public void removePropertyChangeListener(PropertyChangeListener l) {
     	propertyHandling.removePropertyChangeListener(l);
     }

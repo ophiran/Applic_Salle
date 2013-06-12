@@ -23,24 +23,53 @@ public class News implements Serializable{
     private boolean valid = false;
     
   
+    /**
+     *
+     * @return
+     */
     public String getContenu(){
         return contenu;
     }
+    /**
+     *
+     * @return
+     */
     public Journaliste getAuteur(){
         return auteur;
     }
+    /**
+     *
+     * @return
+     */
     public boolean getImportance(){
         return importance;
     }
+    /**
+     *
+     * @return
+     */
     public String getType(){
         return type;
     }
+    /**
+     *
+     * @return
+     */
     public String getMotsCles(){
         return motsCles;
     }
+    /**
+     *
+     * @return
+     */
     public String[] getListeMotsCles(){
         return this.getMotsCles().split("-|/");
     }
+    /**
+     *
+     * @param keyword
+     * @return
+     */
     public boolean containsMotCle(String keyword){
         for(String s : this.getListeMotsCles()){
             if(s.equals(keyword))
@@ -48,37 +77,81 @@ public class News implements Serializable{
         }
         return false;
     }
+    /**
+     *
+     * @return
+     */
     public String getCommentaires(){
         return commentaires;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isValid() {
     	return valid;
     }
         
+    /**
+     *
+     * @param s
+     */
     public void setContenu(String s){
         contenu = s;
     }
+    /**
+     *
+     * @param j
+     */
     public void setAuteur(Journaliste j){
         auteur = j.copy();
     }
+    /**
+     *
+     * @param b
+     */
     public void setImportance(boolean b){
         importance = b;
     }
+    /**
+     *
+     * @param s
+     */
     public void setType(String s){
         type = s;
     }
+    /**
+     *
+     * @param s
+     */
     public void setMotsCles(String s){
         motsCles = s;
     }
+    /**
+     *
+     * @param s
+     */
     public void setCommentaires(String s){
         commentaires = s;
     }
     
+    /**
+     *
+     * @param valid
+     */
     public void setValidation(boolean valid){
     	this.valid = valid;
     }
         
+    /**
+     *
+     * @param contenu
+     * @param auteur
+     * @param importance
+     * @param type
+     * @param commentaires
+     */
     public News(String contenu, Journaliste auteur, boolean importance, String type, String commentaires){
         this.contenu = contenu;
         if (auteur == null)
@@ -93,6 +166,10 @@ public class News implements Serializable{
         this.commentaires = commentaires;
         
     }
+    /**
+     *
+     * @param n
+     */
     public News(News n){
         this(n.contenu, n.auteur, n.importance, n.type, n.commentaires);
         
@@ -107,6 +184,10 @@ public class News implements Serializable{
     }
     
     
+    /**
+     *
+     * @return
+     */
     public String toStringNet(){
         String sImportance;
         if(importance)
