@@ -87,6 +87,9 @@ public class DialRechPeopleNews extends javax.swing.JDialog implements ActionLis
             catch(NullPointerException npe){
                 
             }
+            catch(ArrayIndexOutOfBoundsException oe) {
+            	
+            }
         }
     }
     
@@ -97,6 +100,9 @@ public class DialRechPeopleNews extends javax.swing.JDialog implements ActionLis
         }
         catch(NullPointerException npe){
 
+        }
+        catch(ArrayIndexOutOfBoundsException oe) {
+        	
         }
     }
 
