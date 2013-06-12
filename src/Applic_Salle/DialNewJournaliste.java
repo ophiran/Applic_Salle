@@ -34,6 +34,7 @@ public class DialNewJournaliste extends javax.swing.JDialog implements ActionLis
         valider_button.addActionListener(this);
         annuler_button.addActionListener(this);
     }
+
     
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -172,6 +172,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         cat_item.addActionListener(this);
         cle_item.addActionListener(this);
         nPeople_item.addActionListener(this);
+        ports_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -412,6 +413,10 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
             }
             if(e.getSource().equals(nPeople_item)){
                 DialRechPeopleNews dial = new DialRechPeopleNews(this, rootPaneCheckingEnabled, listeNewsPeople);
+                dial.setVisible(true);
+            }
+            if(e.getSource().equals(ports_item)){
+                DialListePorts dial = new DialListePorts(this, rootPaneCheckingEnabled, portProp);
                 dial.setVisible(true);
             }
             

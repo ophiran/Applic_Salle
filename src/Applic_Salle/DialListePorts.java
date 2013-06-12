@@ -6,55 +6,38 @@ package Applic_Salle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.Properties;
 import javax.swing.DefaultListModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author ekym
  */
-public class DialListeJournalistes extends javax.swing.JDialog implements ActionListener, ListSelectionListener{
+public class DialListePorts extends javax.swing.JDialog implements ActionListener {
 
-    private java.awt.Frame parent;
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param JournalisteListe
+     * Creates new form DialListePorts
      */
-    public DialListeJournalistes(java.awt.Frame parent, boolean modal, HashMap<String,Journaliste> JournalisteListe) {
+    public DialListePorts(java.awt.Frame parent, boolean modal, Properties portProp) {
         super(parent, modal);
         initComponents();
         
         quitter_button.addActionListener(this);
-        list_journalistes.addListSelectionListener(this);
-        this.parent = parent;
         
-        DefaultListModel list = new DefaultListModel();
-        for(Journaliste j: JournalisteListe.values())
-        {
-            list.addElement(j);
+        DefaultListModel liste = new DefaultListModel();
+        for(Object o : portProp.values()) {
+            liste.addElement(o);
         }
-        this.list_journalistes.setModel(list);
-        
+        listPorts.setModel(liste);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(quitter_button)){
             this.dispose();
         }
     }
-    
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if(Applic_Salle.journalisteConnecte.getId().equals("Administrateur")){
-            DialShowJournaliste dial = new DialShowJournaliste(parent, rootPaneCheckingEnabled, (Journaliste)list_journalistes.getSelectedValue());
-            dial.setVisible(true);
-        }
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,20 +48,20 @@ public class DialListeJournalistes extends javax.swing.JDialog implements Action
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        list_journalistes = new javax.swing.JList();
+        listPorts = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         quitter_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        list_journalistes.setModel(new javax.swing.AbstractListModel() {
+        listPorts.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(list_journalistes);
+        jScrollPane1.setViewportView(listPorts);
 
-        jLabel1.setText("Liste des journalistes");
+        jLabel1.setText("Liste des ports");
 
         quitter_button.setText("Quitter");
 
@@ -87,25 +70,24 @@ public class DialListeJournalistes extends javax.swing.JDialog implements Action
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(quitter_button))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(quitter_button)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quitter_button))
-                .addGap(37, 37, 37))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,7 +97,7 @@ public class DialListeJournalistes extends javax.swing.JDialog implements Action
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList list_journalistes;
+    private javax.swing.JList listPorts;
     private javax.swing.JButton quitter_button;
     // End of variables declaration//GEN-END:variables
 
