@@ -22,8 +22,8 @@ public class DialShowJournaliste extends javax.swing.JDialog implements ActionLi
         
         quitter_button.addActionListener(this);
         
-        nom_label.setText("");
-        prenom_label.setText("");
+        nom_label.setText(journaliste.getNom());
+        prenom_label.setText(journaliste.getPrenom());
         login_label.setText(journaliste.getLogin());
         password_label.setText(journaliste.getPassword());
         isAdmin_label.setText(journaliste.getId());

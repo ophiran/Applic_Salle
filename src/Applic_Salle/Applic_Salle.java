@@ -173,6 +173,7 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
         cle_item.addActionListener(this);
         nPeople_item.addActionListener(this);
         ports_item.addActionListener(this);
+        log_item.addActionListener(this);
         labelJournaliste.setText("Deconnected");
         date_label.setText("Deconnected");
 
@@ -419,6 +420,12 @@ public class Applic_Salle extends javax.swing.JFrame implements ActionListener, 
                 DialListePorts dial = new DialListePorts(this, rootPaneCheckingEnabled, portProp);
                 dial.setVisible(true);
             }
+            
+            if(e.getSource().equals(log_item)){
+                DialLog dial = new DialLog(this, rootPaneCheckingEnabled, propriete.getProperty("LogFile"));
+                dial.setVisible(true);
+            }
+           
             
         }
     }
